@@ -48,9 +48,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  companyId     String
+  companyId     String?
 
-  company       Company @relation(fields: [companyId], references: [id])
+  company       Company? @relation(fields: [companyId], references: [id])
 }
 
 model VerificationToken {
