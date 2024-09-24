@@ -1,0 +1,8 @@
+page name     path            data
+------------- --------------- --------------------------------------
+home          /               last package, with entries and invoice
+invoices      /invoice/list   list of invoices
+packages      /package/list   list of packages
+package       /package/[name] one package with entries
+new           /package/new    form with payment selection
+profile       /profile        user and company

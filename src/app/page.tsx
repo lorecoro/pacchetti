@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
-// import * as actions from '@/actions';
 import { auth, signIn, signOut } from "@/auth";
 
 export default async function Home() {
@@ -28,7 +27,7 @@ export default async function Home() {
           <Button type="submit">Log Out</Button>
         </form>
 
-        { session?.user ? <div>Signed In</div> : <div>Signed Out</div>}
+        { session?.user ? <div>{JSON.stringify(session.user)}</div> : <div>Signed Out</div>}
       </div>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
