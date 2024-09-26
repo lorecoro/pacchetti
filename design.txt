@@ -1,8 +1,15 @@
-page name     path            data
-------------- --------------- --------------------------------------
-home          /               last package, with entries and invoice
-invoices      /invoice/list   list of invoices
-packages      /package/list   list of packages
-package       /package/[name] one package with entries
-new           /package/new    form with payment selection
-profile       /profile        user and company
+page name     path            data                                   data changes pages to revalidate
+------------- --------------- -------------------------------------- ------------ -------------------
+home          /               last package, with entries and invoice no
+invoices      /invoice/list   list of invoices                       no
+packages      /package/list   list of packages                       no
+package       /package/[name] one package with entries               no           dynamic
+new           /package/new    form with payment selection            yes          home, packages
+profile       /profile        user and company                       no
+
+
+
+
+for each path, a folder and a page.tsx must be created
+when data changes, an action must be created (eg. new-package.ts)
+when there are pages to revalidate, the action must do that
