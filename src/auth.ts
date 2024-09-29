@@ -1,8 +1,5 @@
 import NextAuth from "next-auth";
-// import GitHub from "next-auth/providers/github";
 import Nodemailer from "next-auth/providers/nodemailer";
-
-// import Email from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/db";
 
@@ -16,10 +13,6 @@ if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET) {
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
   providers: [
-    // GitHub({
-    //   clientId: GITHUB_CLIENT_ID,
-    //   clientSecret: GITHUB_CLIENT_SECRET
-    // }),
     Nodemailer({
       server: {
         host: process.env.EMAIL_SERVER_HOST,

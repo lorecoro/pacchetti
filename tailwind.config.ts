@@ -10,13 +10,29 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+      // colors: {
+      //   background: "var(--background)",
+      //   foreground: "var(--foreground)",
+      // },
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [nextui({
+    prefix: "nextui",
+    addCommonColors: true,
+    defaultTheme: "light",
+    defaultExtendTheme: "light",
+    layout: {},
+    themes: {
+      light: {
+        layout: {},
+        colors: {},
+      },
+      dark: {
+        layout: {},
+        colors: {},
+      },
+    },
+  })],
 };
 export default config;
