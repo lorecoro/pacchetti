@@ -67,6 +67,7 @@ model Company {
   packages Package[]
   invoices Invoice[]
   users    User[]
+  price    Decimal
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

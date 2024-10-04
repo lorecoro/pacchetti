@@ -9,7 +9,9 @@ export default function User() {
   const session = useSession();
   let signInOrOut;
 
-  if (session.data?.user) {
+  if (session.status === "loading") {
+    signInOrOut = null;
+  } else if (session.data?.user) {
     signInOrOut = (
       <div>
         {session.data.user.name || session.data.user.email}<br />
