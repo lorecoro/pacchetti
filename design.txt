@@ -1,11 +1,12 @@
-page name     path            data                                   data changes pages to revalidate
-------------- --------------- -------------------------------------- ------------ -------------------
-home          /               last package, with entries and invoice no
-invoices      /invoice/list   list of invoices                       no
-packages      /package/list   list of packages                       no
-package       /package/[name] one package with entries               no           dynamic
-new           /package/new    form with payment selection            yes          home, packages
-profile       /profile        user and company                       no
+page name     path            data                                                  data changes pages to revalidate
+------------- --------------- ----------------------------------------------------- ------------ -------------------
+home          /               last package, with entries and invoice                no
+invoices      /invoice/list   list of invoices                                      no
+packages      /package/list   list of packages                                      no
+package       /package/[name] one package with entries                              no           dynamic
+new package   /package/new    form with payment selection                           yes          home, packages
+profile       /profile        user and company                                      no
+new entry     /entry/new      form with start, end, name and package id as argument yes          hpme, package
 
 
 
