@@ -2,6 +2,9 @@ const paths = {
   home() {
     return '/';
   },
+  companies() {
+    return '/company/list';
+  },
   invoices() {
     return '/invoice/list';
   },
@@ -11,8 +14,8 @@ const paths = {
   package(name: string) {
     return `/package/${name}`;
   },
-  newPackage() {
-    return '/package/new';
+  newEntry() {
+    return '/entry/new';
   },
   profile() {
     return '/profile';

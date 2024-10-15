@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Providers from '@/app/providers';
-import Sidenav from '@/components/sidebar';
+import Sidenav from '@/components/common/sidebar';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,11 +31,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <main className="light light:bg-cyan-200 light:text-black bg-black text-white container mx-auto max-w-6xl flex flex-row md:overflow-hidden">
+          <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-4 gap-4 p-4">
             <div className="md:basis-1/6">
               <Sidenav />
             </div>
-            <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+            <div className="grid grid-rows-3 gap-4 p-4">
               {children}
             </div>
           </main>

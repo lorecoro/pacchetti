@@ -1,11 +1,11 @@
 'use server';
 
 import type { Entry } from '@prisma/client';
+import { auth } from '@/auth';
+import { db } from '@/db';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
-import { auth } from '@/auth';
-import { db } from '@/db';
 import paths from '@/paths';
 
 const schema = z.object({
@@ -43,9 +43,9 @@ export async function newEntry(
     return { errors: input.error.flatten().fieldErrors }
   }
 
-  let entry: Entry;
+  let newEntry: Entry;
   try {
-    entry = await db.entry.create({
+    newEntry = await db.entry.create({
       data: {
         start: input.data.start,
         end: input.data.end,

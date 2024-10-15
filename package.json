@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.5.0",
+    "@heroicons/react": "^2.1.5",
     "@nextui-org/react": "2.2.9",
     "@prisma/client": "^5.19.1",
     "framer-motion": "11.5.6",

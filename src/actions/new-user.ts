@@ -1,6 +1,6 @@
 'use server';
 
-import type { Package } from "@prisma/client";
+import type { User } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
@@ -9,39 +9,42 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  payment: z.string()
+  name: z.string(),
+  price: z.number(),
 });
 
-interface newPackageFormState {
+interface newUserFormState {
   errors: {
-    package?: string[];
+    name?: string[];
+    price?: string[];
     _form?: string[];
   }
 };
 
-export async function newPackage(
-  formState: newPackageFormState,
+export async function newUser(
+  formState: newUserFormState,
   formData: FormData
-) {
+): Promise<newUserFormState> {
   const session = await auth();
   if (!session || !session.user) {
     return { errors: { _form: ['Not logged in'] } };
   }
 
   const input = schema.safeParse({
-    payment: formData.get("payment")
+    name: formData.get("name"),
+    price: formData.get("price"),
   });
 
   if (!input.success) {
     return { errors: input.error.flatten().fieldErrors }
   }
 
-  let newPackage: Package;
+  let newUser: User;
   try {
-    newPackage = await db.package.create({
+    newUser = await db.user.create({
       data: {
-        name: '',
-        companyId: ''
+        name: input.data.name,
+        price: input.data.price,
       }
     });
   }
@@ -62,8 +65,8 @@ export async function newPackage(
     }
   }
 
-  revalidatePath(paths.packages());
-  redirect(paths.packages());
+  revalidatePath(paths.companies());
+  redirect(paths.companies());
 
   return { errors: {} }
 }
