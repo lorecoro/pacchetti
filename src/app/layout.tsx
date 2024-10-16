@@ -35,7 +35,7 @@ export default function RootLayout({
             <div className="md:basis-1/6">
               <Sidenav />
             </div>
-            <div className="grid grid-rows-3 gap-4 p-4">
+            <div className="grid col-span-3">
               {children}
             </div>
           </main>
