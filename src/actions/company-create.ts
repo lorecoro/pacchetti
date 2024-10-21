@@ -1,3 +1,5 @@
+// src/actions/company-create.ts
+
 'use server';
 
 import type { Company } from "@prisma/client";
@@ -9,29 +11,30 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  name: z.string(),
-  price: z.number(),
+  name: z.string({ required_error: 'Name is required' }),
+  price: z.coerce.number({ required_error: 'Price is required' })
+    .gt(0),
 });
 
-interface newCompanyFormState {
-  errors: {
-    name?: string[];
+interface createCompanyState {
+  errors?: {
+    companyName?: string[];
     price?: string[];
     _form?: string[];
   }
 };
 
-export async function newCompany(
-  formState: newCompanyFormState,
+export async function createCompany(
+  formState: createCompanyState,
   formData: FormData
-): Promise<newCompanyFormState> {
+): Promise<createCompanyState> {
   const session = await auth();
   if (!session || !session.user) {
     return { errors: { _form: ['Not logged in'] } };
   }
 
   const input = schema.safeParse({
-    name: formData.get("name"),
+    name: formData.get("companyName"),
     price: formData.get("price"),
   });
 
@@ -39,14 +42,16 @@ export async function newCompany(
     return { errors: input.error.flatten().fieldErrors }
   }
 
-  let newCompany: Company;
   try {
-    newCompany = await db.company.create({
+    const newCompany: Company = await db.company.create({
       data: {
         name: input.data.name,
         price: input.data.price,
       }
     });
+    if (!newCompany) {
+      return { errors: { _form: ['Failed to create the company'] } };
+    }
   }
   catch (err:unknown) {
     if (err instanceof Error) {
@@ -67,6 +72,4 @@ export async function newCompany(
 
   revalidatePath(paths.companies());
   redirect(paths.companies());
-
-  return { errors: {} }
 }
