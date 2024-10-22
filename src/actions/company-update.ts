@@ -1,4 +1,4 @@
-// src/actions/company-create.ts
+// src/actions/company-update.ts
 
 'use server';
 
@@ -11,12 +11,13 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
+  id: z.string({ required_error: 'Id is required' }),
   name: z.string({ required_error: 'Name is required' }),
   price: z.coerce.number({ required_error: 'Price is required' })
     .gt(0),
 });
 
-interface createCompanyState {
+interface updateCompanyState {
   errors?: {
     companyName?: string[];
     price?: string[];
@@ -24,33 +25,38 @@ interface createCompanyState {
   }
 };
 
-export default async function CreateCompany(
-  formState: createCompanyState,
+export default async function UpdateCompany(
+  formState: updateCompanyState,
   formData: FormData
-): Promise<createCompanyState> {
+): Promise<updateCompanyState> {
   const session = await auth();
   if (!session || !session.user) {
     return { errors: { _form: ['Not logged in'] } };
   }
 
   const input = schema.safeParse({
+    id: formData.get("id"),
     name: formData.get("companyName"),
     price: formData.get("price"),
   });
 
+  console.log(formData);
   if (!input.success) {
     return { errors: input.error.flatten().fieldErrors }
   }
 
   try {
-    const newCompany: Company = await db.company.create({
+    const editedCompany: Company = await db.company.update({
+      where: {
+        id: input.data.id,
+      },
       data: {
         name: input.data.name,
         price: input.data.price,
       }
     });
-    if (!newCompany) {
-      return { errors: { _form: ['Failed to create the company'] } };
+    if (!editedCompany) {
+      return { errors: { _form: ['Failed to update the company'] } };
     }
   }
   catch (err:unknown) {

@@ -1,40 +1,60 @@
-// src/components/company/form-new.tsx
+// src/components/company/edit.tsx
 
 'use client';
 
 import { useFormState } from "react-dom";
-import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
-import { createCompany } from "@/actions/company-create";
+import { Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
+import { PencilIcon } from "@heroicons/react/24/outline";
+import UpdateCompany from "@/actions/company-update";
 import ButtonWithSpinner from "@/components/common/button-with-spinner";
 
-export default function NewCompany() {
-  const [formState, action] = useFormState(createCompany, { errors: {} });
+interface Props {
+  company: {
+    id: string;
+    name: string;
+    price: string;
+  };
+}
+
+export default function EditButton(props: Props) {
+  const [formState, action] = useFormState(UpdateCompany, { errors: {} });
 
   return (
     <Popover placement="bottom-start">
       <PopoverTrigger>
-        <Button>New company</Button>
+        <button type="submit">
+          <PencilIcon className="w-5" />
+        </button>
       </PopoverTrigger>
       <PopoverContent>
         <form action={action}>
           <div>
-            <Input 
+            <Input
+              isReadOnly
+              name="id"
+              label="ID"
+              labelPlacement="outside"
+              defaultValue={props.company.id}
+            />
+            <Input
               name="companyName"
               label="Company name"
               labelPlacement="outside"
               placeholder="Company name"
+              defaultValue={props.company.name}
               isInvalid={!!formState?.errors?.companyName}
               errorMessage={formState?.errors?.companyName?.join(', ')}
             />
-            <Input 
+            <Input
               name="price"
               label="Package price"
               labelPlacement="outside"
               placeholder="Price"
+              defaultValue={props.company.price}
               isInvalid={!!formState?.errors?.price}
               errorMessage={formState?.errors?.price?.join(', ')}
             />
-            
+
             {formState?.errors?._form ? <div>{formState?.errors?._form.join(', ')}</div> : null}
 
             <ButtonWithSpinner>Submit</ButtonWithSpinner>

@@ -1,7 +1,7 @@
 // src/app/company/list/page.tsx
 
 import CompanyList from '@/components/company/list';
-import NewCompany from '@/components/company/form-new';
+import NewCompany from '@/components/company/new';
 
 export default function Page() {
   return (
