@@ -1,6 +1,5 @@
 'use server';
 
-import type { Invoice } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
@@ -51,9 +50,8 @@ export async function newInvoice(
     return { errors: input.error.flatten().fieldErrors }
   }
 
-  let newInvoice: Invoice;
   try {
-    newInvoice = await db.invoice.create({
+    await db.invoice.create({
       data: {
         number: input.data.number,
         date: input.data.date,

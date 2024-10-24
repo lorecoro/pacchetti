@@ -17,29 +17,29 @@ export default function Header() {
         <Image src="/packages-logo.png" width={200} height={200} alt="Pacchetti"></Image>
       </div>
 
-      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-3 px-3 font-medium text-zinc-950 dark:text-zinc-400">
+      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">
         <HomeIcon className="w-6" />
-        <Link className="mr-auto text-sm font-medium text-zinc-950 dark:text-zinc-400 p-4" href={paths.home()}>Dashboard</Link>
+        <Link className="mr-auto text-base font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.home()}>Dashboard</Link>
       </div>
 
-      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-3 px-3 font-medium text-zinc-950 dark:text-zinc-400">
+      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">
         <BuildingOffice2Icon className="w-6" />
-        <Link className="mr-auto text-sm font-medium text-zinc-950 dark:text-zinc-400 p-4" href={paths.companies()}>Companies</Link>
+        <Link className="mr-auto text-base font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.companies()}>Companies</Link>
       </div>
 
-      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-3 px-3 font-medium text-zinc-950 dark:text-zinc-400">
+      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">
         <DocumentCurrencyEuroIcon className="w-6" />
-        <Link className="mr-auto text-sm font-medium text-zinc-950 dark:text-zinc-400 p-4" href={paths.invoices()}>Invoices</Link>
+        <Link className="mr-auto text-base font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.invoices()}>Invoices</Link>
       </div>
 
-      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-3 px-3 font-medium text-zinc-950 dark:text-zinc-400">
+      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">
         <ArchiveBoxIcon className="w-6" />
-        <Link className="mr-auto text-sm font-medium text-zinc-950 dark:text-zinc-400 p-4" href={paths.packages()}>Packages</Link>
+        <Link className="mr-auto text-base font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.packages()}>Packages</Link>
       </div>
 
-      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-3 px-3 font-medium text-zinc-950 dark:text-zinc-400">
+      <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">
         <ClockIcon className="w-6" />
-        <Link className="mr-auto text-sm font-medium text-zinc-950 dark:text-zinc-400 p-4" href={paths.newEntry()}>New Entry</Link>
+        <Link className="mr-auto text-base font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.newEntry()}>New Entry</Link>
       </div>
 
       <User />

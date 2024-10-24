@@ -1,6 +1,5 @@
 'use server';
 
-import type { Package } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
@@ -36,9 +35,8 @@ export async function newPackage(
     return { errors: input.error.flatten().fieldErrors }
   }
 
-  let newPackage: Package;
   try {
-    newPackage = await db.package.create({
+    await db.package.create({
       data: {
         name: '',
         companyId: ''

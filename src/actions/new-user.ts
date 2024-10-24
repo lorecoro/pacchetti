@@ -1,6 +1,5 @@
 'use server';
 
-import type { User } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
@@ -16,7 +15,6 @@ const schema = z.object({
 interface newUserFormState {
   errors: {
     name?: string[];
-    price?: string[];
     _form?: string[];
   }
 };
@@ -32,19 +30,16 @@ export async function newUser(
 
   const input = schema.safeParse({
     name: formData.get("name"),
-    price: formData.get("price"),
   });
 
   if (!input.success) {
     return { errors: input.error.flatten().fieldErrors }
   }
 
-  let newUser: User;
   try {
-    newUser = await db.user.create({
+    await db.user.create({
       data: {
         name: input.data.name,
-        price: input.data.price,
       }
     });
   }

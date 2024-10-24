@@ -21,7 +21,7 @@ export default async function DeleteCompany(id: string): Promise<deleteCompanySt
   }
 
   try {
-    const oldCompany = await db.company.delete({
+    await db.company.delete({
       where: {
         id: id,
       },

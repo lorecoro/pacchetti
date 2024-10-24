@@ -6,7 +6,9 @@ import NewCompany from '@/components/company/new';
 export default function Page() {
   return (
     <div>
-      <h2>Companies</h2>
+      <div className="py-6">
+        <h2 className="text-2xl text-bold">Companies</h2>
+      </div>
       <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
         <thead className="bg-slate-50 dark:bg-slate-700">
           <tr>

@@ -1,6 +1,4 @@
 import NewEntry from "@/components/entry/form-new";
-import { Link } from "@nextui-org/react";
-import paths from "@/paths";
 import EntryList from "@/components/entry/list";
 
 interface Props {

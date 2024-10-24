@@ -4,15 +4,8 @@ import "./globals.css";
 import Providers from '@/app/providers';
 import Sidenav from '@/components/common/sidebar';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const folks = localFont({
+  src: "./fonts/Folks-Light.ttf.woff"
 });
 
 export const metadata: Metadata = {
@@ -28,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${folks.className} antialiased`}
       >
         <Providers>
           <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-4 gap-4 p-4">
