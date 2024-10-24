@@ -11,20 +11,21 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  name: z.string({ required_error: 'Name is required' }),
+  name: z.string({ required_error: 'Name is required' })
+    .min(3),
   price: z.coerce.number({ required_error: 'Price is required' })
     .gt(0),
 });
 
-interface createCompanyState {
+export interface createCompanyState {
   errors?: {
-    companyName?: string[];
+    name?: string[];
     price?: string[];
     _form?: string[];
   }
 };
 
-export default async function CreateCompany(
+export async function CreateCompany(
   formState: createCompanyState,
   formData: FormData
 ): Promise<createCompanyState> {
@@ -34,7 +35,7 @@ export default async function CreateCompany(
   }
 
   const input = schema.safeParse({
-    name: formData.get("companyName"),
+    name: formData.get("name"),
     price: formData.get("price"),
   });
 

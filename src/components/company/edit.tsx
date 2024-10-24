@@ -3,10 +3,9 @@
 'use client';
 
 import { useFormState } from "react-dom";
-import { Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import { PencilIcon } from "@heroicons/react/24/outline";
-import UpdateCompany from "@/actions/company-update";
-import ButtonWithSpinner from "@/components/common/button-with-spinner";
+import { UpdateCompany } from "@/actions/company-update";
+import CompanyForm from "./form";
 
 interface Props {
   company: {
@@ -19,48 +18,18 @@ interface Props {
 export default function EditButton(props: Props) {
   const [formState, action] = useFormState(UpdateCompany, { errors: {} });
 
+  const submitButton = (
+    <button type="submit">
+      <PencilIcon className="w-5" />
+    </button>
+  );
+
   return (
-    <Popover placement="bottom-start">
-      <PopoverTrigger>
-        <button type="submit">
-          <PencilIcon className="w-5" />
-        </button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <form action={action}>
-          <div>
-            <Input
-              isReadOnly
-              name="id"
-              label="ID"
-              labelPlacement="outside"
-              defaultValue={props.company.id}
-            />
-            <Input
-              name="companyName"
-              label="Company name"
-              labelPlacement="outside"
-              placeholder="Company name"
-              defaultValue={props.company.name}
-              isInvalid={!!formState?.errors?.companyName}
-              errorMessage={formState?.errors?.companyName?.join(', ')}
-            />
-            <Input
-              name="price"
-              label="Package price"
-              labelPlacement="outside"
-              placeholder="Price"
-              defaultValue={props.company.price}
-              isInvalid={!!formState?.errors?.price}
-              errorMessage={formState?.errors?.price?.join(', ')}
-            />
-
-            {formState?.errors?._form ? <div>{formState?.errors?._form.join(', ')}</div> : null}
-
-            <ButtonWithSpinner>Submit</ButtonWithSpinner>
-          </div>
-        </form>
-      </PopoverContent>
-    </Popover>
+    <CompanyForm
+      submitButton={submitButton}
+      action={action}
+      company={props.company}
+      errors={formState?.errors}
+    />
   )
 }

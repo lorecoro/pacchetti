@@ -12,20 +12,21 @@ import paths from "@/paths";
 
 const schema = z.object({
   id: z.string({ required_error: 'Id is required' }),
-  name: z.string({ required_error: 'Name is required' }),
+  name: z.string({ required_error: 'Name is required' })
+    .min(3),
   price: z.coerce.number({ required_error: 'Price is required' })
     .gt(0),
 });
 
-interface updateCompanyState {
+export interface updateCompanyState {
   errors?: {
-    companyName?: string[];
+    name?: string[];
     price?: string[];
     _form?: string[];
   }
 };
 
-export default async function UpdateCompany(
+export async function UpdateCompany(
   formState: updateCompanyState,
   formData: FormData
 ): Promise<updateCompanyState> {
@@ -36,7 +37,7 @@ export default async function UpdateCompany(
 
   const input = schema.safeParse({
     id: formData.get("id"),
-    name: formData.get("companyName"),
+    name: formData.get("name"),
     price: formData.get("price"),
   });
 
