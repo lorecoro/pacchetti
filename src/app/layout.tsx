@@ -24,12 +24,14 @@ export default function RootLayout({
         className={`${folks.className} antialiased`}
       >
         <Providers>
-          <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-4 gap-4 p-4">
-            <div className="md:basis-1/6">
+          <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-6 gap-4 p-4">
+            <div className="grid col-span-1">
               <Sidenav />
             </div>
-            <div className="grid col-span-3">
-              {children}
+            <div className="grid col-span-5">
+              <div className="w-full border-medium px-4 py-4 rounded-small border-default-400 dark:border-default-100">
+                {children}
+              </div>
             </div>
           </main>
         </Providers>

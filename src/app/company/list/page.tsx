@@ -14,13 +14,13 @@ export default function Page() {
           <tr>
             <th className="w-1/12 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
             </th>
-            <th className="w-2/12 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+            <th className="w-2/12 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-base text-slate-900 dark:text-slate-200 text-left">
               Id
             </th>
-            <th className="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+            <th className="w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-base text-slate-900 dark:text-slate-200 text-left">
               Company name
             </th>
-            <th className="w-1/4 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">
+            <th className="w-1/4 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-base text-slate-900 dark:text-slate-200 text-left">
               Package price
             </th>
           </tr>
