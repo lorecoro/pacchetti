@@ -23,7 +23,6 @@ interface Props {
 
 export default function CompanyForm(props: Props) {
   const { submitButton, action, company, errors} = props;
-console.log(errors);
   return (
     <Popover placement="bottom-start">
       <PopoverTrigger>

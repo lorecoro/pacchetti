@@ -44,6 +44,6 @@ export default async function DeleteCompany(id: string): Promise<deleteCompanySt
     }
   }
 
-  revalidatePath(paths.companies());
-  redirect(paths.companies());
+  revalidatePath(paths.adminCompanies());
+  redirect(paths.adminCompanies());
 }

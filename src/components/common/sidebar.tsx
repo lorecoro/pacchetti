@@ -24,7 +24,7 @@ export default function Header() {
 
       <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">
         <BuildingOffice2Icon className="w-6" />
-        <Link className="mr-auto text-large font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.companies()}>Companies</Link>
+        <Link className="mr-auto text-large font-semibold text-zinc-950 dark:text-zinc-400 p-4" href={paths.adminCompanies()}>Companies</Link>
       </div>
 
       <div className="flex w-full max-w-full items-center justify-between rounded-lg py-1 px-3 text-zinc-950 dark:text-zinc-400">

@@ -2,8 +2,8 @@ const paths = {
   home() {
     return '/';
   },
-  companies() {
-    return '/company/list';
+  adminCompanies() {
+    return '/admin/company/list';
   },
   invoices() {
     return '/invoice/list';

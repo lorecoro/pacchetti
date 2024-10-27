@@ -77,6 +77,6 @@ export async function UpdateCompany(
     }
   }
 
-  revalidatePath(paths.companies());
-  redirect(paths.companies());
+  revalidatePath(paths.adminCompanies());
+  redirect(paths.adminCompanies());
 }

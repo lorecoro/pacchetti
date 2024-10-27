@@ -1,4 +1,4 @@
-// src/app/company/list/page.tsx
+// src/app/admin/company/list/page.tsx
 
 import CompanyList from '@/components/company/list';
 import NewCompany from '@/components/company/new';
