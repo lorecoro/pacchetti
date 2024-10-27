@@ -1,12 +1,21 @@
 'use server';
 
-import { signIn, signOut } from "@/auth"
+import { auth, signIn, signOut } from "@/auth"
 
 export async function logIn() {
-  console.log('loggin in');
   return signIn();
 }
 
 export async function logOut() {
   return signOut();
+}
+
+export async function isAdmin() {
+  const session = await auth();
+  return (session?.user?.role === 'ADMIN')
+}
+
+export async function isAuthenticated() {
+  const session = await auth();
+  return (!!session?.user);
 }

@@ -60,8 +60,8 @@ export async function newUser(
     }
   }
 
-  revalidatePath(paths.companies());
-  redirect(paths.companies());
+  // revalidatePath(paths.companies());
+  // redirect(paths.companies());
 
   return { errors: {} }
 }
