@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from "@nextui-org/react";
-import { signIn, signOut } from "@/actions/user";
+import { logIn, logOut } from "@/actions/user";
 import { useSession } from "next-auth/react";
 import { signOut as nextAuthSignOut } from "next-auth/react";
 
@@ -15,8 +15,10 @@ export default function User() {
     signInOrOut = (
       <div>
         {session.data.user.name || session.data.user.email}<br />
+        {session.data.user.role}<br />
         <form action={ async () => {
-          await signIn();
+          await logOut();
+          await nextAuthSignOut({ redirect: false });
         }}>
           <Button type="submit" color="secondary">Sign out</Button>
         </form>
@@ -26,8 +28,7 @@ export default function User() {
     signInOrOut = (
       <div>
         <form action={ async () => {
-          await signOut();
-          await nextAuthSignOut({ redirect: false });
+          await logIn();
         }}>
           <Button type="submit" color="secondary">Sign in</Button>
         </form>

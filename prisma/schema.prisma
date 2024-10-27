@@ -49,6 +49,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   companyId     String?
+  role          Role     @default(USER)
 
   company       Company? @relation(fields: [companyId], references: [id])
 }
@@ -119,4 +120,9 @@ model Entry {
 enum Payment {
   Paypal
   BankTransfer
+}
+
+enum Role {
+  USER
+  ADMIN
 }

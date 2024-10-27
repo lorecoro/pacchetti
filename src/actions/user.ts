@@ -1,11 +1,12 @@
 'use server';
 
-import * as auth from "../auth";
+import { signIn, signOut } from "@/auth"
 
-export async function signIn() {
-  return auth.signIn('github');
+export async function logIn() {
+  console.log('loggin in');
+  return signIn();
 }
 
-export async function signOut() {
-  return auth.signOut();
+export async function logOut() {
+  return signOut();
 }
