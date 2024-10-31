@@ -20,3 +20,4 @@ when there are pages to revalidate, the action must do that
 
 improvements:
 - find some data grid components to edit stuff
+- favicon
