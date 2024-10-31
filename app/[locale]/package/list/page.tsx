@@ -1,4 +1,4 @@
-import PackageList from "@/components/package/list";
+import PackageList from "@/app/components/package/list";
 import { Divider } from "@nextui-org/react";
 
 export default function Page() {

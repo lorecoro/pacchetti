@@ -1,5 +1,5 @@
-import NewEntry from "@/components/entry/form-new";
-import EntryList from "@/components/entry/list";
+import NewEntry from "@/app/components/entry/form-new";
+import EntryList from "@/app/components/entry/list";
 
 interface Props {
   params: {

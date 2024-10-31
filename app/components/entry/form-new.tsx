@@ -3,7 +3,7 @@
 import { useFormState } from "react-dom";
 import { Button, Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import { newEntry } from "@/actions/new-entry";
-import ButtonWithSpinner from "@/components/common/button-with-spinner";
+import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
 
 export default function NewEntry() {
   const [formState, action] = useFormState(newEntry, { errors: {} });

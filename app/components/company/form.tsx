@@ -4,7 +4,7 @@
 
 import { Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import { ReactNode } from "react";
-import ButtonWithSpinner from "@/components/common/button-with-spinner";
+import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
 
 interface Props {
   submitButton: ReactNode;

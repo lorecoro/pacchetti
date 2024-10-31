@@ -15,11 +15,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang={locale} className="light">
       <body
         className={`${folks.className} antialiased`}
       >
