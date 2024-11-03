@@ -1,9 +1,15 @@
-// src/app/admin/company/list/page.tsx
+// app/[locale]/admin/company/list/page.tsx
 
+import { isAdmin, isAuthenticated } from "@/actions/user";
 import CompanyList from '@/app/components/company/list';
 import NewCompany from '@/app/components/company/new';
 
-export default function Page() {
+export default async function Page() {
+  const admin: boolean = await isAdmin();
+  const authenticated: boolean = await isAuthenticated();
+  if (!authenticated || !admin) {
+    return null;
+  }
   return (
     <div>
       <div className="py-6">

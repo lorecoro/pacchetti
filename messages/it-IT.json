@@ -1,5 +1,16 @@
 {
+  "Errors": {
+    "Not logged in": "Non autenticato"
+  },
   "Sidebar": {
-    "Dashboard": "Cruscotto"
+    "Companies": "Aziende",
+    "Dashboard": "Cruscotto",
+    "Invoices": "Fatture",
+    "New Entry": "Nuova attività",
+    "Packages": "Pacchetti"
+  },
+  "User": {
+    "Sign in": "Accedi",
+    "Sign out": "Esci"
   }
 }

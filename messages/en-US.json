@@ -1,5 +1,16 @@
 {
+  "Errors": {
+    "Not logged in": "Not logged in"
+  },
   "Sidebar": {
-    "Dashboard": "Dashboard"
+    "Companies": "Companies",
+    "Dashboard": "Dashboard",
+    "Invoices": "Invoices",
+    "New Entry": "New Entry",
+    "Packages": "Packages"
+  },
+  "User": {
+    "Sign in": "Sign in",
+    "Sign out": "Sign out"
   }
 }

@@ -1,15 +1,17 @@
 "use server";
 
 import { getLocale } from "next-intl/server";
+import { Link } from "./i18n/routing";
 
 const paths = async () => {
   const locale = await getLocale();
+  const prefix = locale.split('-')[0];
   return {
     home() {
       return '/';
     },
     adminCompanies() {
-      return {pathname: '/admin/company/list', locale};
+      return `${prefix}/admin/company/list`;
     },
     invoices() {
       return '/invoice/list';

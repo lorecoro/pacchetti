@@ -1,10 +1,11 @@
-// src/actions/company-create.ts
+// actions/company-create.ts
 
 'use server';
 
 import type { Company } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -29,9 +30,10 @@ export async function CreateCompany(
   formState: createCompanyState,
   formData: FormData
 ): Promise<createCompanyState> {
+  const t = await getTranslations();
   const session = await auth();
   if (!session || !session.user) {
-    return { errors: { _form: ['Not logged in'] } };
+    return { errors: { _form: [t('Not logged in')] } };
   }
 
   const input = schema.safeParse({
@@ -71,6 +73,7 @@ export async function CreateCompany(
     }
   }
 
-  revalidatePath(paths.adminCompanies());
-  redirect(paths.adminCompanies());
+  const { adminCompanies } = await paths();
+  revalidatePath(adminCompanies());
+  redirect(adminCompanies());
 }

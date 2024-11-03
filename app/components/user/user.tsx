@@ -1,4 +1,6 @@
-'use client';
+// app/components/user/user.tsx
+
+"use client";
 
 import { Button } from "@nextui-org/react";
 import { logIn, logOut } from "@/actions/user";
@@ -6,9 +8,11 @@ import { useSession } from "next-auth/react";
 import { signOut as nextAuthSignOut } from "next-auth/react";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 
 export default function User() {
   const session = useSession();
+  const t = useTranslations("User");
   let signInOrOut: ReactNode;
 
   if (session.status === "loading") {
@@ -27,18 +31,18 @@ export default function User() {
           await logOut();
           await nextAuthSignOut({ redirect: false });
         }}>
-          <Button type="submit" className="bg-zinc-400 text-medium px-6">Sign out</Button>
+          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("Sign out")}</Button>
         </form>
       </div>
       </>
     );
   } else {
     signInOrOut = (
-      <div>
+      <div className="flex w-full max-w-full items-center justify-center">
         <form action={ async () => {
           await logIn();
         }}>
-          <Button type="submit" color="primary">Sign in</Button>
+          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("Sign in")}</Button>
         </form>
       </div>
     );
