@@ -1,16 +1,22 @@
 {
-  "Errors": {
-    "Not logged in": "Not logged in"
+  "errors": {
+    "failed_to_create_the_company": "Failed to create the company",
+    "not_logged_in": "Not logged in",
+    "something_went_wrong": "Something went wrong"
   },
-  "Sidebar": {
-    "Companies": "Companies",
-    "Dashboard": "Dashboard",
-    "Invoices": "Invoices",
-    "New Entry": "New Entry",
-    "Packages": "Packages"
+  "metadata": {
+    "title": "Packages",
+    "description": "App for managing assistance packages"
   },
-  "User": {
-    "Sign in": "Sign in",
-    "Sign out": "Sign out"
+  "sidebar": {
+    "companies": "Companies",
+    "dashboard": "Dashboard",
+    "invoices": "Invoices",
+    "new_entry": "New Entry",
+    "packages": "Packages"
+  },
+  "user": {
+    "sign_in": "Sign in",
+    "sign_out": "Sign out"
   }
 }

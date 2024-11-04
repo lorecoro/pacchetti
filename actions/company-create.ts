@@ -33,7 +33,7 @@ export async function CreateCompany(
   const t = await getTranslations();
   const session = await auth();
   if (!session || !session.user) {
-    return { errors: { _form: [t('Not logged in')] } };
+    return { errors: { _form: [t('not_logged_in')] } };
   }
 
   const input = schema.safeParse({
@@ -53,7 +53,7 @@ export async function CreateCompany(
       }
     });
     if (!newCompany) {
-      return { errors: { _form: ['Failed to create the company'] } };
+      return { errors: { _form: [t('failed_to_create_the_company')] } };
     }
   }
   catch (err:unknown) {
@@ -67,7 +67,7 @@ export async function CreateCompany(
     else {
       return {
         errors: {
-          _form: ['Something went wrong']
+          _form: [t('something_went_wrong')]
         }
       }
     }

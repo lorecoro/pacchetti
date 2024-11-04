@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 
 export default function User() {
   const session = useSession();
-  const t = useTranslations("User");
+  const t = useTranslations("user");
   let signInOrOut: ReactNode;
 
   if (session.status === "loading") {
@@ -31,7 +31,7 @@ export default function User() {
           await logOut();
           await nextAuthSignOut({ redirect: false });
         }}>
-          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("Sign out")}</Button>
+          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("sign_out")}</Button>
         </form>
       </div>
       </>
@@ -42,7 +42,7 @@ export default function User() {
         <form action={ async () => {
           await logIn();
         }}>
-          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("Sign in")}</Button>
+          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("sign_in")}</Button>
         </form>
       </div>
     );

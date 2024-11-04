@@ -1,21 +1,28 @@
 // app/[locale]/layout.tsx
 
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Providers from '@/app/providers';
 import Sidebar from '@/app/components/common/sidebar';
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 
 const folks = localFont({
   src: "./fonts/Folks-Light.ttf.woff"
 });
 
-export const metadata: Metadata = {
-  title: "Pacchetti",
-  description: "App per gestire i pacchetti di assistenza",
-};
+interface Params {
+  locale: string;
+}
+
+export async function generateMetadata({ locale }: Params) {
+  const t = await getTranslations({ locale, namespace: 'metadata'});
+
+  return {
+    title: t('title'),
+    description: t('description')
+  };
+}
 
 export default async function RootLayout({
   children,

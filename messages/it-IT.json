@@ -1,16 +1,22 @@
 {
-  "Errors": {
-    "Not logged in": "Non autenticato"
+  "errors": {
+    "failed_to_create_the_company": "Creazione dell'azienda fallita",
+    "not_logged_in": "Non autenticato",
+    "something_went_wrong": "Qualcosa è andato storto"
   },
-  "Sidebar": {
-    "Companies": "Aziende",
-    "Dashboard": "Cruscotto",
-    "Invoices": "Fatture",
-    "New Entry": "Nuova attività",
-    "Packages": "Pacchetti"
+  "metadata": {
+    "title": "Pacchetti",
+    "description": "App per gestire i pacchetti di assistenza"
   },
-  "User": {
-    "Sign in": "Accedi",
-    "Sign out": "Esci"
+  "sidebar": {
+    "companies": "Aziende",
+    "dashboard": "Cruscotto",
+    "invoices": "Fatture",
+    "new_entry": "Nuova attività",
+    "packages": "Pacchetti"
+  },
+  "user": {
+    "sign_in": "Accedi",
+    "sign_out": "Esci"
   }
 }
