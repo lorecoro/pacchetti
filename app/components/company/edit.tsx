@@ -1,4 +1,4 @@
-// src/components/company/edit.tsx
+// app/components/company/edit.tsx
 
 'use client';
 

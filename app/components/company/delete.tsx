@@ -1,4 +1,4 @@
-// src/components/company/delete.tsx
+// app/components/company/delete.tsx
 
 'use client';
 

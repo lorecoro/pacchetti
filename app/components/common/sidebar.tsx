@@ -20,7 +20,7 @@ import { SessionProvider } from "next-auth/react"
 export default async function Sidebar() {
   const admin: boolean = await isAdmin();
   const authenticated: boolean = await isAuthenticated();
-  const t = await getTranslations("sidebar");
+  const t = await getTranslations("ui");
   const { home, adminCompanies, invoices, packages, newEntry } = await paths();
 
   return (

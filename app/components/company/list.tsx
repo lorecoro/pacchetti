@@ -1,4 +1,4 @@
-// src/components/company/list.tsx
+// app/components/company/list.tsx
 
 'use server';
 

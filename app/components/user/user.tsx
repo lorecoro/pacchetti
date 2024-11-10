@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 
 export default function User() {
   const session = useSession();
-  const t = useTranslations("user");
+  const t = useTranslations("ui");
   let signInOrOut: ReactNode;
 
   if (session.status === "loading") {

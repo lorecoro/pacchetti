@@ -1,9 +1,10 @@
-// src/actions/company-delete.ts
+// actions/company-delete.ts
 
 'use server';
 
 import { auth } from "@/auth";
 import { db } from "@/db";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import paths from "@/paths";
@@ -15,9 +16,10 @@ interface deleteCompanyState {
 };
 
 export default async function DeleteCompany(id: string): Promise<deleteCompanyState> {
+  const t = await getTranslations();
   const session = await auth();
   if (!session || !session.user) {
-    return { errors: { _form: ['Not logged in'] } };
+    return { errors: { _form: [t('not_logged_in')] } };
   }
 
   try {
@@ -38,12 +40,13 @@ export default async function DeleteCompany(id: string): Promise<deleteCompanySt
     else {
       return {
         errors: {
-          _form: ['Something went wrong']
+          _form: [t('something_went_wrong')]
         }
       }
     }
   }
 
-  revalidatePath(paths.adminCompanies());
-  redirect(paths.adminCompanies());
+  const { adminCompanies } = await paths();
+  revalidatePath(adminCompanies());
+  redirect(adminCompanies());
 }

@@ -1,10 +1,11 @@
-// src/actions/company-update.ts
+// actions/company-update.ts
 
 'use server';
 
 import type { Company } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -30,9 +31,10 @@ export async function UpdateCompany(
   formState: updateCompanyState,
   formData: FormData
 ): Promise<updateCompanyState> {
+  const t = await getTranslations();
   const session = await auth();
   if (!session || !session.user) {
-    return { errors: { _form: ['Not logged in'] } };
+    return { errors: { _form: [t('not_logged_in')] } };
   }
 
   const input = schema.safeParse({
@@ -57,7 +59,7 @@ export async function UpdateCompany(
       }
     });
     if (!editedCompany) {
-      return { errors: { _form: ['Failed to update the company'] } };
+      return { errors: { _form: [t('failed_to_update_the_company')] } };
     }
   }
   catch (err:unknown) {
@@ -71,12 +73,13 @@ export async function UpdateCompany(
     else {
       return {
         errors: {
-          _form: ['Something went wrong']
+          _form: [t('something_went_wrong')]
         }
       }
     }
   }
 
-  revalidatePath(paths.adminCompanies());
-  redirect(paths.adminCompanies());
+  const { adminCompanies } = await paths();
+  revalidatePath(adminCompanies());
+  redirect(adminCompanies());
 }

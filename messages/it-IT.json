@@ -1,6 +1,7 @@
 {
   "errors": {
     "failed_to_create_the_company": "Creazione dell'azienda fallita",
+    "failed_to_update_the_company": "Aggiornamento dell'azienda fallito",
     "not_logged_in": "Non autenticato",
     "something_went_wrong": "Qualcosa è andato storto"
   },
@@ -8,15 +9,19 @@
     "title": "Pacchetti",
     "description": "App per gestire i pacchetti di assistenza"
   },
-  "sidebar": {
+  "ui": {
     "companies": "Aziende",
+    "company_name": "Nome azienda",
     "dashboard": "Cruscotto",
     "invoices": "Fatture",
+    "new_company": "Nuova azienda",
     "new_entry": "Nuova attività",
-    "packages": "Pacchetti"
-  },
-  "user": {
+    "package_price": "Costo del pacchetto",
+    "packages": "Pacchetti",
+    "please_sign_in": "Si prega di fare login",
     "sign_in": "Accedi",
-    "sign_out": "Esci"
+    "sign_out": "Esci",
+    "to_use_this_app": "Per usare questa applicazione è necessario autenticarsi",
+    "welcome": "Benvenuto"
   }
 }

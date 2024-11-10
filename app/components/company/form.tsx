@@ -1,9 +1,10 @@
-// src/components/company/form.tsx
+// app/components/company/form.tsx
 
 'use client';
 
 import { Input, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
 
 interface Props {
@@ -23,6 +24,7 @@ interface Props {
 
 export default function CompanyForm(props: Props) {
   const { submitButton, action, company, errors} = props;
+  const t = useTranslations("ui");
   return (
     <Popover placement="bottom-start">
       <PopoverTrigger>
@@ -42,18 +44,18 @@ export default function CompanyForm(props: Props) {
             )}
             <Input
               name="name"
-              label="Company name"
+              label={t("company_name")}
               labelPlacement="outside"
-              placeholder="Company name"
+              placeholder={t("company_name")}
               defaultValue={company?.name}
               isInvalid={!!errors?.name}
               errorMessage={errors?.name?.join(', ')}
             />
             <Input
               name="price"
-              label="Package price"
+              label={t("package_price")}
               labelPlacement="outside"
-              placeholder="Price"
+              placeholder={t("package_price")}
               defaultValue={company?.price}
               isInvalid={!!errors?.price}
               errorMessage={errors?.price?.join(', ')}
