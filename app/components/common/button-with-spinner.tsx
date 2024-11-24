@@ -12,7 +12,11 @@ interface Props {
 export default function ButtonWithSpinner({children}: Props) {
   const { pending } = useFormStatus();
 
-  return <Button type="submit" isLoading={pending}>
-    {children}
-  </Button>
+  return (
+    <div>
+      <Button type="submit" size="md" isLoading={pending}>
+        {children}
+      </Button>
+    </div>
+  );
 }

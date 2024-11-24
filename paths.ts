@@ -10,10 +10,10 @@ const paths = async () => {
       return '/';
     },
     adminCompanies() {
-      return `${prefix}/admin/company/list`;
+      return `/${prefix}/admin/company/list`;
     },
     invoices() {
-      return '/invoice/list';
+      return `/${prefix}/invoice/list`;
     },
     packages() {
       return '/package/list';

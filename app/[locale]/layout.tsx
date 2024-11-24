@@ -7,8 +7,9 @@ import Sidebar from '@/app/components/common/sidebar';
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from 'next-intl/server';
 
-const folks = localFont({
-  src: "./fonts/Folks-Light.ttf.woff"
+const font = localFont({
+  // src: "./fonts/LTInternet-Regular.ttf"
+  src: "./fonts/Elsa-Regular.otf"
 });
 
 interface Params {
@@ -36,7 +37,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className="light">
-      <body className={`${folks.className} antialiased`}>
+      <body className={`${font.className} antialiased`}>
         <Providers>
           <NextIntlClientProvider messages={messages}>
             <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-6 gap-4 p-4">

@@ -1,38 +1,57 @@
-// src/components/invoice/list.tsx
+// app/components/invoice/list.tsx
 
 'use server';
 
 import { db } from "@/db";
+import { getLocale, getTranslations } from "next-intl/server";
 // import DeleteButton from "./delete";
 // import EditButton from "./edit";
 
-export default async function CompanyList() {
+export default async function InvoiceList() {
+  const locale = await getLocale();
+  const t = await getTranslations("ui");
+
   const list = (await db.invoice.findMany({
-    orderBy: [{date: 'desc', number: 'desc'}]
+    include: { company: true },
+    orderBy: [{date: 'desc'}, {number: 'desc'}]
   }));
 
   const renderedList = list.map((item) => {
     const invoice = {
       id: item.id,
       number: item.number,
-      date: item.date,
-      companu: item.date,
+      date: item.date.toLocaleDateString(locale, {year: 'numeric', month: '2-digit', day: '2-digit'}),
+      company: item.company.name,
       amount: item.amount.toFixed(2),
+      payment: item.payment,
+      paid: item.paid ? 'yes' : 'no'
     }
     return (
-      <tr key={item.id}>
+      <tr key={invoice.id}>
         <td className="border border-slate-300 dark:border-slate-700 p-4 flex justify-around">
           {/* <EditButton company={company} />
           <DeleteButton id={item.id} /> */}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {item.id}
+          {invoice.id}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {item.name}
+          {invoice.number}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {item.price.toFixed(2)}
+          {invoice.date}
+        </td>
+        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+          {invoice.company}
+        </td>
+        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+          {invoice.amount}
+        </td>
+        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+          {invoice.payment}
+        </td>
+        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+          {t(invoice.paid)}
         </td>
       </tr>
     )

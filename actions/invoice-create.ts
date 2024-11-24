@@ -1,22 +1,28 @@
+// actions/invoice-create.ts
+
 'use server';
 
+import type { Invoice } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  number: z.string(),
-  date: z.date(),
+  number: z.string()
+    .min(1),
+  date: z.coerce.date(),
   companyId: z.string(),
-  amount: z.number(),
-  payment: z.enum(['Paypal', 'BankTransfer']),
-  paid: z.boolean()
+  amount: z.coerce.number({ required_error: 'Amount is required' })
+    .gt(0),
+  payment: z.enum(['paypal', 'bank_transfer']),
+  paid: z.boolean().default(false)
 });
 
-interface newInvoiceFormState {
+interface createInvoiceState {
   errors: {
     number?: string[];
     date?: string[];
@@ -28,13 +34,14 @@ interface newInvoiceFormState {
   }
 };
 
-export async function newInvoice(
-  formState: newInvoiceFormState,
+export async function CreateInvoice(
+  formState: createInvoiceState,
   formData: FormData
-): Promise<newInvoiceFormState> {
+): Promise<createInvoiceState> {
+  const t = await getTranslations();
   const session = await auth();
   if (!session || !session.user) {
-    return { errors: { _form: ['Not logged in'] } };
+    return { errors: { _form: [t('not_logged_in')] } };
   }
 
   const input = schema.safeParse({
@@ -43,15 +50,15 @@ export async function newInvoice(
     companyId: formData.get("companyId"),
     amount: formData.get("amount"),
     payment: formData.get("payment"),
-    paid: formData.get("paid")
+    paid: formData.has("paid") ? true : false
   });
 
   if (!input.success) {
+    console.log(formData, input.data);
     return { errors: input.error.flatten().fieldErrors }
   }
-
   try {
-    await db.invoice.create({
+    const newInvoice: Invoice = await db.invoice.create({
       data: {
         number: input.data.number,
         date: input.data.date,
@@ -61,6 +68,9 @@ export async function newInvoice(
         paid: input.data.paid
       }
     });
+    if (!newInvoice) {
+      return { errors: { _form: [t('failed_to_create_the_invoice')] } };
+    }
   }
   catch (err:unknown) {
     if (err instanceof Error) {
@@ -73,14 +83,13 @@ export async function newInvoice(
     else {
       return {
         errors: {
-          _form: ['Something went wrong']
+          _form: [t('something_went_wrong')]
         }
       }
     }
   }
 
-  revalidatePath(paths.invoices());
-  redirect(paths.invoices());
-
-  return { errors: {} }
+  const { invoices } = await paths();
+  revalidatePath(invoices());
+  redirect(invoices());
 }

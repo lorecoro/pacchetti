@@ -1,6 +1,7 @@
 {
   "errors": {
     "failed_to_create_the_company": "Creazione dell'azienda fallita",
+    "failed_to_create_the_invoice": "Creazione della fattura fallita",
     "failed_to_update_the_company": "Aggiornamento dell'azienda fallito",
     "not_logged_in": "Non autenticato",
     "something_went_wrong": "Qualcosa è andato storto"
@@ -10,18 +11,26 @@
     "description": "App per gestire i pacchetti di assistenza"
   },
   "ui": {
+    "amount": "Importo",
     "companies": "Aziende",
     "company_name": "Nome azienda",
     "dashboard": "Cruscotto",
+    "date": "Data",
     "invoices": "Fatture",
     "new_company": "Nuova azienda",
     "new_entry": "Nuova attività",
+    "new_invoice": "Nuova fattura",
+    "no": "No",
+    "number": "Numero",
     "package_price": "Costo del pacchetto",
     "packages": "Pacchetti",
+    "paid": "Pagato",
+    "payment": "Pagamento",
     "please_sign_in": "Si prega di fare login",
     "sign_in": "Accedi",
     "sign_out": "Esci",
     "to_use_this_app": "Per usare questa applicazione è necessario autenticarsi",
-    "welcome": "Benvenuto"
+    "welcome": "Benvenuto",
+    "yes": "Si"
   }
 }

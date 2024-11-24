@@ -118,8 +118,8 @@ model Entry {
 }
 
 enum Payment {
-  Paypal
-  BankTransfer
+  paypal
+  bank_transfer
 }
 
 enum Role {

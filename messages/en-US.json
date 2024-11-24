@@ -1,6 +1,7 @@
 {
   "errors": {
     "failed_to_create_the_company": "Failed to create the company",
+    "failed_to_create_the_invoice": "Failed to create the invoice",
     "failed_to_update_the_company": "Failed to update the company",
     "not_logged_in": "Not logged in",
     "something_went_wrong": "Something went wrong"
@@ -10,18 +11,26 @@
     "description": "App for managing assistance packages"
   },
   "ui": {
+    "amount": "Amount",
     "companies": "Companies",
     "company_name": "Company name",
     "dashboard": "Dashboard",
+    "date": "Date",
     "invoices": "Invoices",
     "new_company": "New Company",
     "new_entry": "New Entry",
+    "new_invoice": "New Invoice",
+    "no": "No",
+    "number": "Number",
     "package_price": "Package price",
     "packages": "Packages",
+    "paid": "Paid",
+    "payment": "Payment",
     "please_sign_in": "Please sign in",
     "sign_in": "Sign in",
     "sign_out": "Sign out",
     "to_use_this_app": "In order to use this app you need to authenticate",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "yes": "Yes"
   }
 }
