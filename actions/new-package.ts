@@ -60,8 +60,7 @@ export async function newPackage(
     }
   }
 
-  revalidatePath(paths.packages());
-  redirect(paths.packages());
-
-  return { errors: {} }
+  const { packages } = await paths();
+  revalidatePath(packages());
+  redirect(packages());
 }

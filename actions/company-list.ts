@@ -6,7 +6,7 @@ import type { Company } from "@prisma/client";
 import { auth } from "@/auth";
 import { db } from "@/db";
 
-type CompanyIdName = Pick<Company, "id" | "name">;
+export type CompanyIdName = Pick<Company, "id" | "name">;
 
 export async function fetchCompaniesIdName(): Promise<CompanyIdName[]|void> {
   const session = await auth();

@@ -8,8 +8,7 @@ import { DatePicker } from "@nextui-org/date-picker";
 import { Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
-import type { Company } from "@prisma/client";
-type CompanyIdName = Pick<Company, "id" | "name">;
+import type { CompanyIdName } from "@/actions/company-list";
 
 interface Props {
   caption: string;

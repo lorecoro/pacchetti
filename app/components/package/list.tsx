@@ -3,14 +3,13 @@
 import Link from "next/link";
 import { Chip } from "@nextui-org/react";
 import { db } from "@/db";
-import paths from "@/paths";
 
 export default async function PackageList() {
   const list = await db.package.findMany();
   const renderedList = list.map((item) => {
     return (
       <div key={item.id}>
-        <Link href={paths.package(item.id)}>
+        <Link href="#">
           <Chip color="warning" variant="shadow">{item.name}</Chip>
         </Link>
 

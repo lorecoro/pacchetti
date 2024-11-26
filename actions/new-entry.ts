@@ -69,8 +69,7 @@ export async function newEntry(
     }
   }
 
-  revalidatePath(paths.home());
-  redirect(paths.home());
-
-  return { errors: {} }
+  const { home } = await paths();
+  revalidatePath(home());
+  redirect(home());
 }

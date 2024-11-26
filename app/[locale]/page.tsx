@@ -11,13 +11,13 @@ export default async function Home() {
   const content = authenticated ? (
     <div>
       <div className="py-6">
-        <h1 className="text-2xl text-bold">{t("dashboard")} {admin ?? "Admin"}</h1>
+        <h1>{t("dashboard")} {admin ?? "Admin"}</h1>
       </div>
     </div>
   ) : (
     <div>
       <div className="py-6">
-        <h1 className="text-2xl text-bold">{t("welcome")}</h1>
+        <h1>{t("welcome")}</h1>
       </div>
       <div>
         <p>{t("to_use_this_app")}</p>
