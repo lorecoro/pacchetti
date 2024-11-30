@@ -3,6 +3,7 @@
     "failed_to_create_the_company": "Creazione dell'azienda fallita",
     "failed_to_create_the_invoice": "Creazione della fattura fallita",
     "failed_to_update_the_company": "Aggiornamento dell'azienda fallito",
+    "failed_to_update_the_invoice": "Aggiornamento della fattura fallito",
     "not_logged_in": "Non autenticato",
     "something_went_wrong": "Qualcosa è andato storto"
   },

@@ -3,6 +3,7 @@
     "failed_to_create_the_company": "Failed to create the company",
     "failed_to_create_the_invoice": "Failed to create the invoice",
     "failed_to_update_the_company": "Failed to update the company",
+    "failed_to_update_the_invoice": "Failed to update the invoice",
     "not_logged_in": "Not logged in",
     "something_went_wrong": "Something went wrong"
   },

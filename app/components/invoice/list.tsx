@@ -4,8 +4,8 @@
 
 import { db } from "@/db";
 import { getLocale, getTranslations } from "next-intl/server";
-// import DeleteButton from "./delete";
-// import EditButton from "./edit";
+import DeleteButton from "./delete";
+import EditButton from "./edit";
 
 export default async function InvoiceList() {
   const locale = await getLocale();
@@ -29,8 +29,8 @@ export default async function InvoiceList() {
     return (
       <tr key={invoice.id}>
         <td className="border border-slate-300 dark:border-slate-700 p-4 flex justify-around">
-          {/* <EditButton company={company} />
-          <DeleteButton id={item.id} /> */}
+          <EditButton invoice={invoice} />
+          <DeleteButton id={item.id} />
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
           {invoice.id}
