@@ -5,7 +5,10 @@
 import { Accordion, AccordionItem, Select, SelectItem } from "@nextui-org/react";
 import { Checkbox, CheckboxGroup } from "@nextui-org/checkbox";
 import { DatePicker } from "@nextui-org/date-picker";
+import { I18nProvider } from "@react-aria/i18n";
 import { Input } from "@nextui-org/react";
+import { parse, formatISO } from 'date-fns';
+import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import { useTranslations } from "next-intl";
 import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
 import type { CompanyIdName } from "@/actions/company-list";
@@ -72,13 +75,21 @@ export default function InvoiceForm(props: Props) {
             isInvalid={!!errors?.number}
             errorMessage={errors?.number?.join(', ')}
           />
+          <I18nProvider locale="IT-it">
           <DatePicker
             name="date"
             label={t("date")}
             labelPlacement="outside"
+            defaultValue={
+              invoice?.date
+              ? parseDate(formatISO(parse(invoice.date, 'dd/MM/yyyy', new Date()), { representation: 'date' }))
+              : today(getLocalTimeZone())
+            }
             isInvalid={!!errors?.date}
             errorMessage={errors?.date?.join(', ')}
           />
+          </I18nProvider>
+          {invoice?.companyId}
           <Select
             name="companyId"
             items={companySelect}
@@ -96,7 +107,7 @@ export default function InvoiceForm(props: Props) {
             label={t("amount")}
             labelPlacement="outside"
             placeholder={t("amount")}
-            defaultValue={invoice?.amount.toFixed(2)}
+            defaultValue={typeof invoice?.amount === 'number' ? invoice?.amount.toFixed(2) : invoice?.amount}
             isInvalid={!!errors?.amount}
             errorMessage={errors?.amount?.join(', ')}
           />

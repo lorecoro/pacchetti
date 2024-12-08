@@ -39,7 +39,7 @@ export default async function Page() {
           </tr>
         </thead>
         <tbody>
-          <InvoiceList />
+          <InvoiceList companies={companies}/>
         </tbody>
       </table>
       { admin &&

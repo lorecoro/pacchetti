@@ -6,8 +6,13 @@ import { db } from "@/db";
 import { getLocale, getTranslations } from "next-intl/server";
 import DeleteButton from "./delete";
 import EditButton from "./edit";
+import type { CompanyIdName } from "@/actions/company-list";
 
-export default async function InvoiceList() {
+interface Props {
+  companies: CompanyIdName[];
+}
+
+export default async function InvoiceList(props: Props) {
   const locale = await getLocale();
   const t = await getTranslations("ui");
 
@@ -22,14 +27,15 @@ export default async function InvoiceList() {
       number: item.number,
       date: item.date.toLocaleDateString(locale, {year: 'numeric', month: '2-digit', day: '2-digit'}),
       company: item.company.name,
-      amount: item.amount.toFixed(2),
+      companyId: item.companyId,
+      amount: item.amount.toNumber(),
       payment: item.payment,
-      paid: item.paid ? 'yes' : 'no'
+      paid: item.paid
     }
     return (
       <tr key={invoice.id}>
         <td className="border border-slate-300 dark:border-slate-700 p-4 flex justify-around">
-          <EditButton invoice={invoice} />
+          <EditButton invoice={invoice} companies={props.companies}/>
           <DeleteButton id={item.id} />
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
@@ -45,13 +51,13 @@ export default async function InvoiceList() {
           {invoice.company}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {invoice.amount}
+          {invoice.amount.toFixed(2)}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
           {invoice.payment}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {t(invoice.paid)}
+          {t(invoice.paid ? 'yes' : 'no')}
         </td>
       </tr>
     )
