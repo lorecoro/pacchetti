@@ -13,6 +13,7 @@
   },
   "ui": {
     "amount": "Amount",
+    "bank_transfer": "Bank Transfer",
     "companies": "Companies",
     "company_name": "Company name",
     "dashboard": "Dashboard",
@@ -28,6 +29,7 @@
     "packages": "Packages",
     "paid": "Paid",
     "payment": "Payment",
+    "paypal": "PayPal",
     "please_sign_in": "Please sign in",
     "sign_in": "Sign in",
     "sign_out": "Sign out",

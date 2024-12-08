@@ -54,7 +54,7 @@ export default async function InvoiceList(props: Props) {
           {invoice.amount.toFixed(2)}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {invoice.payment}
+          {t(invoice.payment)}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
           {t(invoice.paid ? 'yes' : 'no')}

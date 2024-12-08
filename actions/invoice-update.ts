@@ -14,7 +14,7 @@ import paths from "@/paths";
 const schema = z.object({
   id: z.string({ required_error: 'Id is required' }),
   number: z.string({ required_error: 'Number is required' })
-    .min(3),
+    .min(1),
   date: z.coerce.date(),
   companyId: z.string({ required_error: 'Company is required' })
     .min(3),

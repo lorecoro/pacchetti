@@ -18,7 +18,7 @@ interface Props {
 export default function EditButton(props: Props) {
   const [formState, action] = useFormState(UpdateCompany, { errors: {} });
 
-  const submitButton = (
+  const editButton = (
     <button type="submit">
       <PencilIcon className="w-5" />
     </button>
@@ -26,7 +26,7 @@ export default function EditButton(props: Props) {
 
   return (
     <CompanyForm
-      submitButton={submitButton}
+      submitButton={editButton}
       action={action}
       company={props.company}
       errors={formState?.errors}

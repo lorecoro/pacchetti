@@ -26,10 +26,16 @@ export default function EditButton(props: Props) {
   const [formState, action] = useFormState(UpdateInvoice, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("edit_invoice");
+  const editButton = (
+    <button type="submit">
+      <PencilIcon className="w-5" />
+    </button>
+  );
 
   return (
     <InvoiceForm
       caption={caption}
+      icon={editButton}
       action={action}
       invoice={props.invoice}
       companies={props.companies}

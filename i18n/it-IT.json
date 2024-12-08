@@ -13,6 +13,7 @@
   },
   "ui": {
     "amount": "Importo",
+    "bank_transfer": "Bonifico",
     "companies": "Aziende",
     "company_name": "Nome azienda",
     "dashboard": "Cruscotto",
@@ -28,6 +29,7 @@
     "packages": "Pacchetti",
     "paid": "Pagato",
     "payment": "Pagamento",
+    "paypal": "PayPal",
     "please_sign_in": "Si prega di fare login",
     "sign_in": "Accedi",
     "sign_out": "Esci",
