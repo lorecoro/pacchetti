@@ -27,8 +27,8 @@ export default function EditButton(props: Props) {
   const t = useTranslations("ui");
   const caption = t("edit_invoice");
   const editButton = (
-    <button type="submit">
-      <PencilIcon className="w-5" />
+    <button type="submit" className="align-middle">
+      <PencilIcon className="w-5 text-black"/>
     </button>
   );
 

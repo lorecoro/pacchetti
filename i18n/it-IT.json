@@ -18,6 +18,7 @@
     "company_name": "Nome azienda",
     "dashboard": "Cruscotto",
     "date": "Data",
+    "delete_confirmation": "Confermi eliminazione?",
     "edit_invoice": "Modifica fattura",
     "invoices": "Fatture",
     "new_company": "Nuova azienda",

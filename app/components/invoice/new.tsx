@@ -21,6 +21,7 @@ export default function NewInvoice(props: Props) {
   return (
     <InvoiceForm
       caption={caption}
+      icon={false}
       action={action}
       companies={companies}
       errors={formState?.errors}

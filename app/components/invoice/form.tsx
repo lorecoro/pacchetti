@@ -48,23 +48,44 @@ type SelectArray = {
 export default function InvoiceForm(props: Props) {
   const { caption, icon, action, companies, invoice, errors} = props;
   const t = useTranslations("ui");
+
   const companySelect: SelectArray[] = companies.map((company) => {
     return {key: company.id, label: company.name}
   });
   const [selectedCompany, setSelectedCompany] = useState<Selection>(
     invoice?.companyId ? new Set([invoice.companyId]) : new Set([])
   );
+
   const paymentSelect: SelectArray[] = [
-    { key: 'paypal', label: 'PayPal' },
-    { key: 'bank_transfer', label: 'Bank Transfer' }
+    { key: 'paypal', label: t('paypal') },
+    { key: 'bank_transfer', label: t('bank_transfer') }
   ];
   const [selectedPayment, setSelectedPayment] = useState<Selection>(
     invoice?.payment ? new Set([invoice.payment]) : new Set([])
   );
 
+  type accordionPropsType = {
+    key: string;
+    'aria-label': string;
+    indicator?: ReactNode;
+    title?: string;
+    variant?: 'splitted' | undefined;
+  }
+  const accordionProps: accordionPropsType = {
+    key: '1',
+    'aria-label': caption,
+  };
+  if (icon) {
+    accordionProps.indicator = icon;
+  }
+  else {
+    accordionProps.title = caption;
+    accordionProps.variant = 'splitted';
+  }
+
   return (
     <Accordion>
-      <AccordionItem key="1" aria-label={caption} indicator={icon}>
+      <AccordionItem {...accordionProps}>
         <form action={action}>
           {invoice?.id && (
             <Input
