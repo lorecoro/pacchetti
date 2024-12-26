@@ -4,6 +4,7 @@
 
 import { db } from "@/db";
 import { getLocale, getTranslations } from "next-intl/server";
+import { getUserCompanyId, isAdmin } from "@/actions/user";
 import DeleteButton from "./delete";
 import EditButton from "./edit";
 import type { CompanyIdName } from "@/actions/company-list";
@@ -15,11 +16,23 @@ interface Props {
 export default async function InvoiceList(props: Props) {
   const locale = await getLocale();
   const t = await getTranslations("ui");
+  const admin: boolean = await isAdmin();
 
-  const list = (await db.invoice.findMany({
-    include: { company: true },
-    orderBy: [{date: 'desc'}, {number: 'desc'}]
-  }));
+  let list = [];
+  if (admin) {
+    list = (await db.invoice.findMany({
+      include: { company: true },
+      orderBy: [{date: 'desc'}, {number: 'desc'}]
+    }));
+  }
+  else {
+    const companyId = await getUserCompanyId();
+    list = (await db.invoice.findMany({
+      include: { company: true },
+      where: { companyId: companyId },
+      orderBy: [{date: 'desc'}, {number: 'desc'}]
+    }));
+  }
 
   const renderedList = list.map((item) => {
     const invoice = {
@@ -34,29 +47,33 @@ export default async function InvoiceList(props: Props) {
     }
     return (
       <tr key={invoice.id}>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 flex justify-around">
+        { admin &&
+        <td className="p-4 flex justify-around">
           <EditButton invoice={invoice} companies={props.companies}/>
           <DeleteButton id={item.id} />
         </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+        }
+        <td className="py-8">
           {invoice.id}
         </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+        <td className="py-8">
           {invoice.number}
         </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+        <td className="py-8">
           {invoice.date}
         </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {invoice.company}
-        </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+        { admin &&
+          <td className="py-8">
+            {invoice.company}
+          </td>
+        }
+        <td className="py-8">
           {invoice.amount.toFixed(2)}
         </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+        <td className="py-8">
           {t(invoice.payment)}
         </td>
-        <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
+        <td className="py-8">
           {t(invoice.paid ? 'yes' : 'no')}
         </td>
       </tr>

@@ -17,6 +17,9 @@ for each path, a folder and a page.tsx must be created
 when data changes, an action must be created (eg. new-package.ts)
 when there are pages to revalidate, the action must do that
 
+users:
+admin: xyz@libero.it
+customer: abc@gmail.com
 
 improvements:
 - find some data grid components to edit stuff

@@ -28,11 +28,11 @@ export default async function Page() {
       <table className="w-full">
         <thead className="bg-slate-250 dark:bg-slate-700">
           <tr>
-            <th className="w-1/12"></th>
+            { admin && <th className="w-1/12"></th> }
             <th className="w-2/12">Id</th>
             <th className="w-1/12">{t("number")}</th>
             <th className="w-1/12">{t("date")}</th>
-            <th className="w-3/12">{t("company_name")}</th>
+            { admin && <th className="w-3/12">{t("company_name")}</th> }
             <th className="w-2/12">{t("amount")}</th>
             <th className="w-2/12">{t("payment")}</th>
             <th className="w-1/12">{t("paid")}</th>
