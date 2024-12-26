@@ -43,9 +43,9 @@ export default async function Page() {
         </tbody>
       </table>
       { admin &&
-      <div className="mt-4 w-4/12">
-        <NewInvoice companies={companies}/>
-      </div>
+        <div className="mt-4 w-4/12">
+          <NewInvoice companies={companies}/>
+        </div>
       }
     </div>
   );
