@@ -45,6 +45,7 @@ export default async function InvoiceList(props: Props) {
       payment: item.payment,
       paid: item.paid
     }
+
     return (
       <tr key={invoice.id}>
         { admin &&

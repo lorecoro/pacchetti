@@ -53,7 +53,6 @@ export async function UpdateInvoice(
     paid: formData.has("paid") ? true : false
   });
 
-  console.log(formData);
   if (!input.success) {
     return { errors: input.error.flatten().fieldErrors }
   }

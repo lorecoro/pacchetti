@@ -65,14 +65,12 @@ export default function InvoiceForm(props: Props) {
   );
 
   type accordionPropsType = {
-    key: string;
     'aria-label': string;
     indicator?: ReactNode;
     title?: string;
     variant?: 'splitted' | undefined;
   }
   const accordionProps: accordionPropsType = {
-    key: '1',
     'aria-label': caption,
   };
   if (icon) {
@@ -85,7 +83,7 @@ export default function InvoiceForm(props: Props) {
 
   return (
     <Accordion>
-      <AccordionItem {...accordionProps}>
+      <AccordionItem key="1" {...accordionProps}>
         <form action={action}>
           {invoice?.id && (
             <Input
@@ -130,7 +128,7 @@ export default function InvoiceForm(props: Props) {
             isInvalid={!!errors?.companyId}
             errorMessage={errors?.companyId?.join(', ')}
           >
-            {(company) => <SelectItem key={company.key}>{company.label}</SelectItem>}
+            {(company) => <SelectItem key={company.key} textValue={company.label}>{company.label}</SelectItem>}
           </Select>
           <Input
             name="amount"
@@ -152,7 +150,7 @@ export default function InvoiceForm(props: Props) {
             isInvalid={!!errors?.payment}
             errorMessage={errors?.payment?.join(', ')}
           >
-            {paymentSelect.map((payment) => <SelectItem key={payment.key}>{payment.label}</SelectItem>)}
+            {paymentSelect.map((payment) => <SelectItem key={payment.key} textValue={payment.label}>{payment.label}</SelectItem>)}
           </Select>
 
           {invoice?.paid 

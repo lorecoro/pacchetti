@@ -54,7 +54,6 @@ export async function CreateInvoice(
   });
 
   if (!input.success) {
-    console.log(formData, input.data);
     return { errors: input.error.flatten().fieldErrors }
   }
   try {
