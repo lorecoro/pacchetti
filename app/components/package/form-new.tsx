@@ -3,7 +3,7 @@
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
 
-export default function NewPackage() {
+export default function OrderPackage() {
   return (
     <Popover placement="left">
       <PopoverTrigger>
