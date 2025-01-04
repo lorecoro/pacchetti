@@ -1,5 +1,6 @@
 // app/[locale]/admin/company/list/page.tsx
 
+import { db } from "@/db";
 import { getTranslations } from "next-intl/server";
 import { isAdmin, isAuthenticated } from "@/actions/user";
 import CompanyList from '@/app/components/company/list';
@@ -12,6 +13,10 @@ export default async function Page() {
   if (!authenticated || !admin) {
     return null;
   }
+  const companies = (await db.company.findMany({
+    orderBy: [{name: 'asc'}]
+  }));
+
   return (
     <div>
       <div className="py-6">
@@ -27,7 +32,7 @@ export default async function Page() {
           </tr>
         </thead>
         <tbody>
-          <CompanyList />
+          <CompanyList companies={companies}/>
         </tbody>
       </table>
       <NewCompany />

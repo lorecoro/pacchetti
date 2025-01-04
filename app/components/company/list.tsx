@@ -1,21 +1,22 @@
 // app/components/company/list.tsx
 
-'use server';
+'use client';
 
-import { db } from "@/db";
+import type { Company } from "@prisma/client";
 import DeleteButton from "./delete";
 import EditButton from "./edit";
 
-export default async function CompanyList() {
-  const list = (await db.company.findMany({
-    orderBy: [{name: 'asc'}]
-  }));
+interface Props {
+  companies: Company[]
+}
+export default function CompanyList(props: Props) {
+  const { companies } = props;
 
-  const renderedList = list.map((item) => {
+  const renderedList = companies.map((item) => {
     const company = {
       id: item.id,
       name: item.name,
-      price: item.price.toFixed(2),
+      price: parseFloat(item.price.toString()).toFixed(2),
     }
     return (
       <tr key={item.id}>
@@ -30,7 +31,7 @@ export default async function CompanyList() {
           {item.name}
         </td>
         <td className="border border-slate-300 dark:border-slate-700 p-4 text-base text-slate-500 dark:text-slate-400 font-semibold">
-          {item.price.toFixed(2)}
+          {parseFloat(item.price.toString()).toFixed(2)}
         </td>
       </tr>
     )

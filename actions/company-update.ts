@@ -43,7 +43,6 @@ export async function UpdateCompany(
     price: formData.get("price"),
   });
 
-  console.log(formData);
   if (!input.success) {
     return { errors: input.error.flatten().fieldErrors }
   }
