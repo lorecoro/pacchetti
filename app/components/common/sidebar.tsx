@@ -27,7 +27,7 @@ export default async function Sidebar() {
     <SessionProvider>
       <div className="w-full border-medium px-4 py-4 rounded-small border-default-400 dark:border-default-100">
         <div className="flex w-full max-w-full mx-auto justify-center">
-          <Image src="/packages-logo.png" width={200} height={200} alt={t("packages")}></Image>
+          <Image src="/packages-logo.png" width={200} height={200} alt={t("packages")} priority></Image>
         </div>
 
         {authenticated &&

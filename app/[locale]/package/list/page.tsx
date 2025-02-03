@@ -2,20 +2,41 @@
 
 'use server';
 
-import { getTranslations } from "next-intl/server";
+import EditButton from "@/app/components/package/edit";
+import DeleteButton from "@/app/components/package/delete";
+import { db } from "@/db";
+import { getLocale, getTranslations } from "next-intl/server";
 import { fetchCompaniesIdName } from "@/actions/company-list";
 import { fetchInvoicesIdNumber } from "@/actions/invoice-list";
-import { isAdmin, isAuthenticated } from "@/actions/user";
-import PackageList from "@/app/components/package/list";
+import { getUserCompanyId, isAdmin, isAuthenticated } from "@/actions/user";
 import NewPackage from "@/app/components/package/new";
+import type { Package } from "@prisma/client";
 
 export default async function Page() {
+  const locale = await getLocale();
   const t = await getTranslations("ui");
   const admin: boolean = await isAdmin();
   const authenticated: boolean = await isAuthenticated();
   if (!authenticated) {
     return null;
   }
+
+  let packages = [];
+  if (admin) {
+    packages = (await db.package.findMany({
+      include: { company: true, invoice: true, entries: true },
+      orderBy: [{name: 'desc'}]
+    }));
+  }
+  else {
+    const companyId = await getUserCompanyId();
+    packages = (await db.package.findMany({
+      include: { company: true, invoice: true, entries: true },
+      where: { companyId: companyId },
+      orderBy: [{name: 'desc'}]
+    }));
+  }
+
   const companies = await fetchCompaniesIdName();
   if (!companies) {
     return null;
@@ -24,6 +45,38 @@ export default async function Page() {
   if (!invoices) {
     return null;
   }
+
+  const renderedList = packages.map((item) => {
+    const invoiceName = item.invoice
+      ? t('invoice') + ' ' + t('nr') + ' ' + item.invoice.number + ' - ' + item.invoice.date.toLocaleDateString(locale, {year: 'numeric', month: '2-digit', day: '2-digit'})
+      : null;
+    const thePackage: Package = {
+      name: item.name,
+      id: item.id,
+      companyId: item.companyId,
+      invoiceId: item.invoiceId ?? null,
+      createdAt: item.createdAt,
+      updatedAt: item.updatedAt
+    }
+    return (
+      <tr key={item.id}>
+        { admin &&
+        <td className="p-4 flex justify-around">
+          <EditButton package={thePackage} invoices={invoices} companies={companies}/>
+          <DeleteButton id={thePackage.id} />
+        </td>
+        }
+        <td className="py-8">{item.id}</td>
+        <td className="py-8">{item.name}</td>
+        { admin &&
+        <td className="py-8">{item.company.name}</td>
+        }
+        { invoiceName &&
+        <td className="py-8">{invoiceName}</td>
+        }
+      </tr>
+    )
+  });
 
   return (
     <div>
@@ -41,7 +94,7 @@ export default async function Page() {
           </tr>
         </thead>
         <tbody>
-          <PackageList companies={companies} invoices={invoices}/>
+          {renderedList}
         </tbody>
       </table>
       { admin &&

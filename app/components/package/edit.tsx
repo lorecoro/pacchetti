@@ -23,7 +23,7 @@ export default function EditButton(props: Props) {
   const caption = t("edit_package");
   const editButton = (
     <button type="submit" className="align-middle">
-      <PencilIcon className="w-5 text-black"/>
+      <PencilIcon className="w-5"/>
     </button>
   );
 

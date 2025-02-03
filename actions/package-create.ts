@@ -15,7 +15,7 @@ const schema = z.object({
   name: z.string()
     .min(1),
   companyId: z.string(),
-  invoiceId: z.string()
+  invoiceId: z.string().optional()
 });
 
 interface createPackageState {
@@ -47,13 +47,18 @@ export async function CreatePackage(
     return { errors: input.error.flatten().fieldErrors }
   }
   try {
-    const newPackage: Package = await db.package.create({
-      data: {
-        name: input.data.name,
-        companyId: input.data.companyId,
-        invoiceId: input.data.invoiceId
-      }
-    });
+    let data: {
+      name: string;
+      companyId: string;
+      invoiceId?: string | null;
+    } = {
+      name: input.data.name,
+      companyId: input.data.companyId,
+    }
+    if (input.data.invoiceId) {
+      data.invoiceId = input.data.invoiceId
+    }
+    const newPackage: Package = await db.package.create({data: data});
     if (!newPackage) {
       return { errors: { _form: [t('failed_to_create_the_package')] } };
     }

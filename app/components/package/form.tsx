@@ -33,7 +33,7 @@ type SelectArray = {
 }
 
 export default function PackageForm(props: Props) {
-  const { caption, icon, action, companies, invoices, thePackage, errors} = props;
+  const { caption, icon, action, companies, invoices, thePackage, errors } = props;
   const t = useTranslations("ui");
 
   const companySelect: SelectArray[] = companies.map((company) => {
