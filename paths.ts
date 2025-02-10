@@ -21,8 +21,8 @@ const paths = async () => {
     package(name: string) {
       return `/package/${name}`;
     },
-    newEntry() {
-      return '/entry/new';
+    entries() {
+      return '/entry/list';
     },
     profile() {
       return '/profile';

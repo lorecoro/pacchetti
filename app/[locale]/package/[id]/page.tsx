@@ -1,5 +1,5 @@
-import NewEntry from "@/app/components/entry/form-new";
-import EntryList from "@/app/components/entry/list";
+// import NewEntry from "@/app/components/entry/new";
+// import EntryList from "@/app/components/entry/list";
 
 interface Props {
   params: {
@@ -13,9 +13,9 @@ export default function Page({ params }: Props) {
     <div>
       <h1>Package {id}</h1>
 
-      <NewEntry />
+      {/* <NewEntry />
       New package
-      <EntryList />
+      <EntryList /> */}
     </div>
   )
 }

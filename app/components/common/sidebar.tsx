@@ -21,7 +21,7 @@ export default async function Sidebar() {
   const admin: boolean = await isAdmin();
   const authenticated: boolean = await isAuthenticated();
   const t = await getTranslations("ui");
-  const { home, adminCompanies, invoices, packages, newEntry } = await paths();
+  const { home, adminCompanies, invoices, packages, entries } = await paths();
 
   return (
     <SessionProvider>
@@ -75,7 +75,7 @@ export default async function Sidebar() {
           <ClockIcon className="w-6" />
           <Link
             className="mr-auto text-large font-semibold text-zinc-950 dark:text-zinc-400 p-4"
-            href={newEntry()}>{t("new_entry")}
+            href={entries()}>{t("entries")}
           </Link>
         </div>
         }
