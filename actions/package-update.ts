@@ -17,7 +17,8 @@ const schema = z.object({
     .min(1),
   companyId: z.string({ required_error: 'Company is required' })
     .min(3),
-  invoiceId: z.string()
+  invoiceId: z.string(),
+  carried: z.coerce.number()
 });
 
 export interface updatePackageState {
@@ -25,6 +26,7 @@ export interface updatePackageState {
     name?: string[];
     companyId?: string[];
     invoiceId?: string[];
+    carried?: string[];
     _form?: string[];
   }
 };
@@ -43,7 +45,8 @@ export async function UpdatePackage(
     id: formData.get("id"),
     name: formData.get("name"),
     companyId: formData.get("companyId"),
-    invoiceId: formData.get("invoiceId")
+    invoiceId: formData.get("invoiceId"),
+    carried: formData.get("carried"),
   });
 
   if (!input.success) {
@@ -57,8 +60,9 @@ export async function UpdatePackage(
       },
       data: {
         name: input.data.name,
-        companyId: input.data.companyId,
-        invoiceId: input.data.invoiceId,
+        company: { connect: { id: input.data.companyId }},
+        invoice: { connect: { id: input.data.invoiceId }},
+        carried: input.data.carried,
       }
     });
     if (!editedPackage) {

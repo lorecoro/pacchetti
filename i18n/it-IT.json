@@ -17,6 +17,7 @@
   },
   "ui": {
     "amount": "Importo",
+    "amount_carried_forward": "Riporto da periodo precedente",
     "bank_transfer": "Bonifico",
     "companies": "Aziende",
     "company_name": "Nome azienda",

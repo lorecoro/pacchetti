@@ -79,6 +79,7 @@ model Package {
   name      String
   companyId String
   invoiceId String?
+  carried   Int
   entries   Entry[]
 
   createdAt DateTime @default(now())

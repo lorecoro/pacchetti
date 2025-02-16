@@ -55,6 +55,7 @@ export default async function Page() {
       id: item.id,
       companyId: item.companyId,
       invoiceId: item.invoiceId ?? null,
+      carried: item.carried,
       createdAt: item.createdAt,
       updatedAt: item.updatedAt
     }

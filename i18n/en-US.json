@@ -17,6 +17,7 @@
   },
   "ui": {
     "amount": "Amount",
+    "amount_carried_forward": "Amount carried forward",
     "bank_transfer": "Bank Transfer",
     "companies": "Companies",
     "company_name": "Company name",

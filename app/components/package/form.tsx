@@ -10,7 +10,6 @@ import ButtonWithSpinner from "@/app/components/common/button-with-spinner";
 import type { CompanyIdName } from "@/actions/company-list";
 import type { InvoiceIdNumber } from "@/actions/invoice-list";
 import type { Selection } from "@nextui-org/react";
-import type { Package } from "@prisma/client";
 
 interface Props {
   caption: string;
@@ -18,11 +17,20 @@ interface Props {
   action: string | ((formData: FormData) => void | Promise<void>) | undefined;
   companies: CompanyIdName[];
   invoices: InvoiceIdNumber[];
-  thePackage?: Package;
+  thePackage?: {
+    name: string;
+    id: string;
+    companyId: string;
+    invoiceId: string | null;
+    carried: number;
+    createdAt: Date;
+    updatedAt: Date;
+  };
   errors?: {
     name?: string[];
     companyId?: string[];
     invoiceId?: string[];
+    carried?: string[];
     _form?: string[];
   }
 }
@@ -105,6 +113,15 @@ export default function PackageForm(props: Props) {
           >
             {(company) => <SelectItem key={company.key} textValue={company.label}>{company.label}</SelectItem>}
           </Select>
+          <Input
+            name="carried"
+            label={t("amount_carried_forward")}
+            labelPlacement="outside"
+            placeholder={t("amount_carried_forward")}
+            defaultValue={typeof thePackage?.carried === 'number' ? thePackage?.carried.toFixed(0) : thePackage?.carried}
+            isInvalid={!!errors?.carried}
+            errorMessage={errors?.carried?.join(', ')}
+          />
           <Select
             name="invoiceId"
             items={invoiceSelect}

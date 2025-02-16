@@ -15,7 +15,8 @@ const schema = z.object({
   name: z.string()
     .min(1),
   companyId: z.string(),
-  invoiceId: z.string().optional()
+  invoiceId: z.string().optional(),
+  carried: z.coerce.number()
 });
 
 interface createPackageState {
@@ -23,6 +24,7 @@ interface createPackageState {
     name?: string[];
     companyId?: string[];
     invoiceId?: string[];
+    carried?: string[];
     _form?: string[];
   }
 };
@@ -41,6 +43,7 @@ export async function CreatePackage(
     name: formData.get("name"),
     companyId: formData.get("companyId"),
     invoiceId: formData.get("invoiceId"),
+    carried: formData.get("carried"),
   });
 
   if (!input.success) {
@@ -52,9 +55,11 @@ export async function CreatePackage(
       name: string;
       companyId: string;
       invoiceId?: string | null;
+      carried: number;
     } = {
       name: input.data.name,
       companyId: input.data.companyId,
+      carried: input.data.carried,
     }
     if (input.data.invoiceId) {
       data.invoiceId = input.data.invoiceId
