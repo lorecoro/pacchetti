@@ -4,12 +4,14 @@
 
 import EditButton from "@/app/components/package/edit";
 import DeleteButton from "@/app/components/package/delete";
+import NewPackage from "@/app/components/package/new";
+import paths from "@/paths";
+import Link from "next/link";
 import { db } from "@/db";
 import { getLocale, getTranslations } from "next-intl/server";
 import { fetchCompaniesIdName } from "@/actions/company-list";
 import { fetchInvoicesIdNumber } from "@/actions/invoice-list";
 import { getUserCompanyId, isAdmin, isAuthenticated } from "@/actions/user";
-import NewPackage from "@/app/components/package/new";
 import type { Package } from "@prisma/client";
 
 export default async function Page() {
@@ -46,6 +48,8 @@ export default async function Page() {
     return null;
   }
 
+  const { onePackage } = await paths();
+
   const renderedList = packages.map((item) => {
     const invoiceName = item.invoice
       ? t('invoice') + ' ' + t('nr') + ' ' + item.invoice.number + ' - ' + item.invoice.date.toLocaleDateString(locale, {year: 'numeric', month: '2-digit', day: '2-digit'})
@@ -68,7 +72,7 @@ export default async function Page() {
         </td>
         }
         <td className="py-8">{item.id}</td>
-        <td className="py-8">{item.name}</td>
+        <td className="py-8"><Link className="hover:underline" href={onePackage(item.id)}>{item.name}</Link></td>
         { admin &&
         <td className="py-8">{item.company.name}</td>
         }
