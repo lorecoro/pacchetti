@@ -2,17 +2,14 @@
 
 'use server';
 
-import EditButton from "@/app/components/package/edit";
-import DeleteButton from "@/app/components/package/delete";
+import Row from "./row";
 import NewPackage from "@/app/components/package/new";
 import paths from "@/paths";
-import Link from "next/link";
 import { db } from "@/db";
 import { getLocale, getTranslations } from "next-intl/server";
 import { fetchCompaniesIdName } from "@/actions/company-list";
 import { fetchInvoicesIdNumber } from "@/actions/invoice-list";
 import { getUserCompanyId, isAdmin, isAuthenticated } from "@/actions/user";
-import type { Package } from "@prisma/client";
 
 export default async function Page() {
   const locale = await getLocale();
@@ -51,36 +48,16 @@ export default async function Page() {
   const { onePackage } = await paths();
 
   const renderedList = packages.map((item) => {
-    const invoiceName = item.invoice
-      ? t('invoice') + ' ' + t('nr') + ' ' + item.invoice.number + ' - ' + item.invoice.date.toLocaleDateString(locale, {year: 'numeric', month: '2-digit', day: '2-digit'})
-      : null;
-    const thePackage: Package = {
-      name: item.name,
-      id: item.id,
-      companyId: item.companyId,
-      invoiceId: item.invoiceId ?? null,
-      carried: item.carried,
-      createdAt: item.createdAt,
-      updatedAt: item.updatedAt
-    }
-    return (
-      <tr key={item.id}>
-        { admin &&
-        <td className="p-4 flex justify-around">
-          <EditButton package={thePackage} invoices={invoices} companies={companies}/>
-          <DeleteButton id={thePackage.id} />
-        </td>
-        }
-        <td className="py-8">{item.id}</td>
-        <td className="py-8"><Link className="hover:underline" href={onePackage(item.id)}>{item.name}</Link></td>
-        { admin &&
-        <td className="py-8">{item.company.name}</td>
-        }
-        { invoiceName &&
-        <td className="py-8">{invoiceName}</td>
-        }
-      </tr>
-    )
+    const onePackagePath = onePackage(item.id);
+    return <Row
+      key={item.id}
+      item={item}
+      companies={companies}
+      invoices={invoices}
+      admin={admin}
+      locale={locale}
+      onePackagePath={onePackagePath}
+    />;
   });
 
   return (
