@@ -74,7 +74,7 @@ export default function Row(props: Props) {
             <th className="w-2/12">{t("start")}</th>
             <th className="w-2/12">{t("end")}</th>
             <th className="w-2/12">{t("time")}</th>
-            <th className="w-6/12">{t("name")}</th>
+            <th className="w-6/12">{t("description")}</th>
           </tr>
         </thead>
         <tbody>
