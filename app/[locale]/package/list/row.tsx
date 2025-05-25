@@ -43,6 +43,7 @@ export default function Row(props: Props) {
   if (admin) {
     timeZone = 'Europe/Helsinki';
   }
+  let totalTime = thePackage.carried;
 
   return (
     <>
@@ -68,8 +69,8 @@ export default function Row(props: Props) {
     <tr key={item.id+"entries"} className={isVisible ? "visible" : "collapse"}>
       <td colSpan={admin ? 5 : 3} className="p-4">
       <table className="w-full">
-        <thead className="bg-slate-250 dark:bg-slate-700">
-          <tr>
+        <thead>
+          <tr className="bg-slate-100 dark:bg-slate-700">
             <th className="w-2/12">{t("start")}</th>
             <th className="w-2/12">{t("end")}</th>
             <th className="w-2/12">{t("time")}</th>
@@ -77,19 +78,27 @@ export default function Row(props: Props) {
           </tr>
         </thead>
         <tbody>
+          <tr key={item.id} className="border-b border-gray-300 dark:border-gray-700 bg-cyan-100 pb-2">
+            <td>-</td>
+            <td>-</td>
+            <td>{item.carried} min.</td>
+            <td>{t("amount_carried_forward")}</td>
+          </tr>
+
           {item.entries.map((entry: any) => {
             const formatOptions: Intl.DateTimeFormatOptions = {
-            timeZone,
-            year: "numeric",
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-          }
-          const startDate = entry.start.toLocaleString(locale, formatOptions);
-          const endDate = entry.end.toLocaleString(locale, formatOptions);
-          const diffMilliseconds = Math.abs(entry.start.getTime() - entry.end.getTime());
-          const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
+              timeZone,
+              year: "numeric",
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit'
+            }
+            const startDate = entry.start.toLocaleString(locale, formatOptions);
+            const endDate = entry.end.toLocaleString(locale, formatOptions);
+            const diffMilliseconds = Math.abs(entry.start.getTime() - entry.end.getTime());
+            const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
+            totalTime += diffMinutes;
             return (
               <tr key={entry.id} className="border-b border-gray-300 dark:border-gray-700 pb-2">
                 <td>{startDate}</td>
@@ -100,6 +109,14 @@ export default function Row(props: Props) {
             )
           })}
         </tbody>
+        <tfoot className="bg-slate-250 dark:bg-slate-700">
+          <tr className="bg-cyan-100 border-t-3">
+            <th className="w-2/12"></th>
+            <th className="w-2/12"></th>
+            <th className="w-2/12 text-black">{totalTime} min.</th>
+            <th className="w-6/12 text-black">{t("total_time_used")}</th>
+          </tr>
+        </tfoot>
       </table>
       </td>
     </tr>
