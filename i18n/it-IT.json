@@ -18,6 +18,7 @@
   "ui": {
     "amount": "Importo",
     "amount_carried_forward": "Riporto da periodo precedente",
+    "available": "Disponibile",
     "bank_transfer": "Bonifico",
     "companies": "Aziende",
     "company_name": "Nome azienda",
@@ -58,6 +59,7 @@
     "time": "Durata",
     "to_use_this_app": "Per usare questa applicazione è necessario autenticarsi",
     "total_time_used": "Tempo totale utilizzato",
+    "used": "Utilizzato",
     "welcome": "Benvenuto",
     "yes": "Si"
   }
