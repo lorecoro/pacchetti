@@ -18,8 +18,8 @@ const paths = async () => {
     packages() {
       return '/package/list';
     },
-    package(name: string) {
-      return `/package/${name}`;
+    onePackage(id: string) {
+      return `/package/${id}`;
     },
     entries() {
       return '/entry/list';
