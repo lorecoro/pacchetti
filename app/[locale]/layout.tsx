@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Providers from '@/app/providers';
 import Sidebar from '@/app/components/common/sidebar';
+import Topbar from '@/app/components/common/topbar';
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from 'next-intl/server';
 
@@ -40,9 +41,12 @@ export default async function RootLayout({
       <body className={`${font.className} antialiased`}>
         <Providers>
           <NextIntlClientProvider messages={messages}>
-            <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-6 gap-4 p-4">
-              <div className="grid col-span-1">
+            <main className="light light:bg-cyan-200 light:text-black bg-black text-white grid grid-cols-1 lg:grid-cols-6 lg:gap-4 p-4">
+              <div className="grid col-span-1 hidden lg:block">
                 <Sidebar />
+              </div>
+              <div className="grid col-span-1 block lg:hidden">
+                <Topbar />
               </div>
               <div className="grid col-span-5">
                 <div className="w-full border-medium px-4 py-4 rounded-small border-default-400 dark:border-default-100">

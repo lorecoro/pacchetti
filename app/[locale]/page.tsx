@@ -80,7 +80,7 @@ export default async function Home() {
       <div className="py-6">
         <h1>{t("dashboard")}</h1>
       </div>
-      <div className="py-6 grid grid-cols-1 md:grid-cols-2">
+      <div className="py-6 grid grid-cols-1 md:grid-cols-2 max-w-5/6">
         <h2 className="text-xl font-500 pt-6 border-t-2 border-slate-400">{t("current_package")} {thePackage.name}</h2>
         <h2 className="text-xl font-500 py-6 pl-6 border-t-2 border-l-2 border-slate-400">{invoiceName}</h2>
       </div>

@@ -42,7 +42,7 @@ export default function User() {
         <form action={ async () => {
           await logIn();
         }}>
-          <Button type="submit" color="primary" className="font-bold text-medium px-6">{t("sign_in")}</Button>
+          <Button type="submit" color="primary" className="font-bold text-medium px-6 my-4">{t("sign_in")}</Button>
         </form>
       </div>
     );
