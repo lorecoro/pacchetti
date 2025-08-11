@@ -53,11 +53,12 @@ export default async function Page() {
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
+      hour12: false,
     }
-    const startDate = item.start.toLocaleString(locale, formatOptions);
-    const endDate = item.end.toLocaleString(locale, formatOptions);
-    const diffMilliseconds = Math.abs(item.start.getTime() - item.end.getTime());
+    const startDate = item.start ? item.start.toLocaleString(locale, formatOptions) : "";
+    const endDate = item.end ? item.end.toLocaleString(locale, formatOptions) : "";
+    const diffMilliseconds = Math.abs(item.start?.getTime() - item.end?.getTime());
     const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
     const theEntry = {
       id: item.id,

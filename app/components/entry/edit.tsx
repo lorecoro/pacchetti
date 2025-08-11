@@ -33,8 +33,8 @@ export default function EditButton(props: Props) {
 
   const theEntry = {
     id: props.entry.id,
-    start: formatISO(parse(props.entry.start, "dd/MM/yyyy, HH:mm", new Date())),
-    end: formatISO(parse(props.entry.end, "dd/MM/yyyy, HH:mm", new Date())),
+    start: props.entry.start ? formatISO(parse(props.entry.start, "MM/dd/yyyy, HH:mm", new Date())) : "",
+    end: props.entry.end ? formatISO(parse(props.entry.end, "MM/dd/yyyy, HH:mm", new Date())) : "",
     name: props.entry.name,
     packageId: props.entry.packageId
   }
