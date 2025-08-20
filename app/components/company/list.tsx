@@ -2,12 +2,12 @@
 
 'use client';
 
-import type { Company } from "@prisma/client";
+import type { CompanyPlain } from "@/types/custom-types";
 import DeleteButton from "./delete";
 import EditButton from "./edit";
 
 interface Props {
-  companies: Company[]
+  companies: CompanyPlain[]
 }
 export default function CompanyList(props: Props) {
   const { companies } = props;

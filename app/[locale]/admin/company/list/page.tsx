@@ -1,5 +1,7 @@
 // app/[locale]/admin/company/list/page.tsx
 
+"use server";
+
 import { db } from "@/db";
 import { getTranslations } from "next-intl/server";
 import { isAdmin, isAuthenticated } from "@/actions/user";
@@ -13,8 +15,13 @@ export default async function Page() {
   if (!authenticated || !admin) {
     return null;
   }
-  const companies = (await db.company.findMany({
+  const companiesRaw = (await db.company.findMany({
     orderBy: [{name: 'asc'}]
+  }));
+  // Transform Decimal fields to string or number
+  const companies = companiesRaw.map(company => ({
+    ...company,
+    price: Number(company.price)
   }));
 
   return (
