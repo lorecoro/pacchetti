@@ -27,7 +27,7 @@
     "prisma": "^5.19.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-gauge-component": "^1.2.64",
+    "react-gauge-component": "^1.2.21",
     "zod": "^3.23.8"
   },
   "devDependencies": {
