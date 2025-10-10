@@ -21,7 +21,7 @@ export default async function Topbar() {
 
   return (
     <div className="w-full border-medium p-4 grid grid-flow-col grid-cols-2 gap-2">
-      <div id="left-col" className="justify-center grid row-span-2">
+      <div id="left-col" className="justify-center grid row-span-{authenticated ? 2 : 1}">
         <Image src="/packages-logo.png" width={125} height={125} alt={t("packages")} priority className="justify-self-center"></Image>
         <User />
       </div>
