@@ -25,21 +25,28 @@ export default async function Page() {
       <div className="py-6">
         <h1>{t("invoices")}</h1>
       </div>
-      <table className="w-full">
+      {/* single-column table for small screens */}
+      <table className="w-full table-fixed min-w-full inset-0 md:hidden">
+        <tbody className="w-screen min-w-full">
+          <InvoiceList companies={companies} layout="single"/>
+        </tbody>
+      </table>
+      {/* multi-column table for medium and larger screens */}
+      <table className="w-full table-fixed min-w-full absolute inset-0 invisible md:static md:visible">
         <thead className="bg-slate-250 dark:bg-slate-700">
           <tr>
             { admin && <th className="w-1/12"></th> }
-            <th className="w-2/12">Id</th>
+            { admin && <th className="w-2/12">Id</th> }
             <th className="w-1/12">{t("number")}</th>
             <th className="w-1/12">{t("date")}</th>
             { admin && <th className="w-3/12">{t("company_name")}</th> }
-            <th className="w-2/12">{t("amount")}</th>
+            <th className="w-1/12">{t("amount")}</th>
             <th className="w-2/12">{t("payment")}</th>
             <th className="w-1/12">{t("paid")}</th>
           </tr>
         </thead>
         <tbody>
-          <InvoiceList companies={companies}/>
+          <InvoiceList companies={companies} layout="multi"/>
         </tbody>
       </table>
       { admin &&
