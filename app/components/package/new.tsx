@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { CreatePackage } from "@/actions/package-create";
 import { useTranslations } from "next-intl";
 import PackageForm from "./form";
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function NewPackage(props: Props) {
-  const [formState, action] = useFormState(CreatePackage, { errors: {} });
+  const [formState, action] = useActionState(CreatePackage, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("new_package");
   const { companies, invoices } = props;

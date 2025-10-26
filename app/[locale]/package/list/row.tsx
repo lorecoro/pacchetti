@@ -46,60 +46,56 @@ export default function Row(props: Props) {
   let totalTime = thePackage.carried;
 
   const entryRows = (layout: 'single' | 'multi') => {
-    return (
-      <>
-        {clientItem.entries?.map((entry: any) => {
-          const formatOptions: Intl.DateTimeFormatOptions = {
-            timeZone,
-            year: "numeric",
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-          }
-          const startDate = entry.start.toLocaleString(locale, formatOptions);
-          const endDate = entry.end.toLocaleString(locale, formatOptions);
-          const diffMilliseconds = Math.abs(entry.start.getTime() - entry.end.getTime());
-          const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
-          totalTime += diffMinutes;
-          if (layout === 'multi') {
-            {/* multi-column table for medium and larger screens and admin*/}
-            return (
-              <tr key={entry.id} className="border-b border-gray-300 dark:border-gray-700 pb-2">
-                <td>{startDate}</td>
-                <td>{endDate}</td>
-                <td>{diffMinutes} min.</td>
-                <td>{entry.name}</td>
-              </tr>
-            )
-          } else {
-            {/* single-column table for small screens, no admin */}
-            return (
-              <tr key={entry.id} className={`pl-4 mb-4 ${isVisible ? 'visible' : 'collapse'}`}>
-                <td>
-                <p>
-                  <span className="text-black dark:text-slate-700 font-semibold">{t("start")}:&nbsp;&nbsp;</span>
-                  {startDate}
-                </p>
-                <p>
-                  <span className="text-black dark:text-slate-700 font-semibold">{t("end")}:&nbsp;&nbsp;</span>
-                  {endDate}
-                </p>
-                <p>
-                  <span className="text-black dark:text-slate-700 font-semibold">{t("time")}:&nbsp;&nbsp;</span>
-                  {diffMinutes} min.
-                </p>
-                <p>
-                  <span className="text-black dark:text-slate-700 font-semibold">{t("description")}:&nbsp;&nbsp;</span>
-                  {entry.name}
-                </p>
-                </td>
-              </tr>
-            );
-          };
-        })};
-      </>
-    );
+    return clientItem.entries?.map((entry: any) => {
+      const formatOptions: Intl.DateTimeFormatOptions = {
+        timeZone,
+        year: "numeric",
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }
+      const startDate = entry.start.toLocaleString(locale, formatOptions);
+      const endDate = entry.end.toLocaleString(locale, formatOptions);
+      const diffMilliseconds = Math.abs(entry.start.getTime() - entry.end.getTime());
+      const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
+      totalTime += diffMinutes;
+      if (layout === 'multi') {
+        {/* multi-column table for medium and larger screens and admin*/}
+        return (
+          <tr key={entry.id} className="border-b border-gray-300 dark:border-gray-700 pb-2">
+            <td>{startDate}</td>
+            <td>{endDate}</td>
+            <td>{diffMinutes} min.</td>
+            <td>{entry.name}</td>
+          </tr>
+        )
+      } else {
+        {/* single-column table for small screens, no admin */}
+        return (
+          <tr key={entry.id} className={`pl-4 mb-4 ${isVisible ? 'visible' : 'collapse'}`}>
+            <td>
+              <p>
+                <span className="text-black dark:text-slate-700 font-semibold">{t("start")}:&nbsp;&nbsp;</span>
+                {startDate}
+              </p>
+              <p>
+                <span className="text-black dark:text-slate-700 font-semibold">{t("end")}:&nbsp;&nbsp;</span>
+                {endDate}
+              </p>
+              <p>
+                <span className="text-black dark:text-slate-700 font-semibold">{t("time")}:&nbsp;&nbsp;</span>
+                {diffMinutes} min.
+              </p>
+              <p>
+                <span className="text-black dark:text-slate-700 font-semibold">{t("description")}:&nbsp;&nbsp;</span>
+                {entry.name}
+              </p>
+            </td>
+          </tr>
+        )
+      }
+    });
   }
 
   if (layout === 'multi') {
@@ -167,42 +163,42 @@ export default function Row(props: Props) {
     {/* single-column table for small screens, no admin */}
     return (
       <tbody className="w-screen min-w-full">
-      <tr key={clientItem.id}>
-        <td>
-          <p>
-            <span className="text-black dark:text-slate-700 font-semibold">{t("name")}:&nbsp;&nbsp;</span>
-            <Link className="hover:underline" href={onePackagePath}>{clientItem.name}</Link>
-            <DetailsButton onClick={toggleVisibility} />
-          </p>
-          { clientItem.invoiceName &&
-          <p>
-            <span className="text-black dark:text-slate-700 font-semibold">{t("invoice")}:&nbsp;&nbsp;</span>
-            {clientItem.invoiceName}
-          </p>
-          }
-        </td>
-      </tr>
-      {/* top line with carried forward */}
-      <tr key={clientItem.id+"entries"} className={isVisible ? 'visible' : 'collapse'}>
-        <td className="bg-cyan-100 pl-4 mb-4">
-          <p>
-            <span className="text-black dark:text-slate-700 font-semibold">{t("amount_carried_forward")}:&nbsp;&nbsp;</span>
-            {clientItem.carried} min.
-          </p>
-        </td>
-      </tr>
-      {/* entries */}
-      {entryRows('single')}
-      {/* totals line */}
-      <tr className={isVisible ? 'visible' : 'collapse'}>
-        <td className="bg-cyan-100 pl-4 mb-4">
-          <p>
-            <span className="text-black dark:text-slate-700 font-semibold">{t("total_time_used")}:&nbsp;&nbsp;</span>
-            {totalTime} min.
-          </p>
-        </td>
-      </tr>
+        <tr key={clientItem.id}>
+          <td>
+            <p>
+              <span className="text-black dark:text-slate-700 font-semibold">{t("name")}:&nbsp;&nbsp;</span>
+              <Link className="hover:underline" href={onePackagePath}>{clientItem.name}</Link>
+              <DetailsButton onClick={toggleVisibility} />
+            </p>
+            { clientItem.invoiceName &&
+            <p>
+              <span className="text-black dark:text-slate-700 font-semibold">{t("invoice")}:&nbsp;&nbsp;</span>
+              {clientItem.invoiceName}
+            </p>
+            }
+          </td>
+        </tr>
+        {/* top line with carried forward */}
+        <tr key={clientItem.id+"entries"} className={isVisible ? 'visible' : 'collapse'}>
+          <td className="bg-cyan-100 pl-4 mb-4">
+            <p>
+              <span className="text-black dark:text-slate-700 font-semibold">{t("amount_carried_forward")}:&nbsp;&nbsp;</span>
+              {clientItem.carried} min.
+            </p>
+          </td>
+        </tr>
+        {/* entries */}
+        {entryRows('single')}
+        {/* totals line */}
+        <tr className={isVisible ? 'visible' : 'collapse'}>
+          <td className="bg-cyan-100 pl-4 mb-4">
+            <p>
+              <span className="text-black dark:text-slate-700 font-semibold">{t("total_time_used")}:&nbsp;&nbsp;</span>
+              {totalTime} min.
+            </p>
+          </td>
+        </tr>
       </tbody>
-    );
+    )
   }
 }

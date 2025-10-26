@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { UpdateCompany } from "@/actions/company-update";
 import CompanyForm from "./form";
@@ -16,12 +16,10 @@ interface Props {
 }
 
 export default function EditButton(props: Props) {
-  const [formState, action] = useFormState(UpdateCompany, { errors: {} });
+  const [formState, action] = useActionState(UpdateCompany, { errors: {} });
 
   const editButton = (
-    <button type="submit">
-      <PencilIcon className="w-5" />
-    </button>
+    <PencilIcon className="w-5" />
   );
 
   return (

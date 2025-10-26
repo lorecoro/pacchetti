@@ -76,12 +76,16 @@ export default async function Home() {
 
   const content = thePackage ? (
     <div className="w-full">
-      <div className="py-6">
+      <div className="pt-6">
         <h1>{t("dashboard")}</h1>
       </div>
       <div className="py-6 grid grid-cols-1 md:grid-cols-2 max-w-5/6">
-        <h2 className="text-xl font-500 pt-6 md:border-t-2 border-slate-400">{t("current_package")} {thePackage.name}</h2>
-        <h2 className="text-xl font-500 py-6 md:pl-6 border-t-2 md:border-l-2 border-slate-400">{invoiceName}</h2>
+        <h2 className="text-xl font-500 pt-6 md:border-t-2 border-slate-400">
+          {t("current_package")}&nbsp;&nbsp;<span className="font-semibold">{thePackage.name}</span>
+        </h2>
+        <h2 className="text-xl font-500 py-6 md:pl-6 border-t-2 md:border-l-2 border-slate-400">
+          {invoiceName}
+        </h2>
       </div>
       <div className="py-6 grid grid-cols-1 md:grid-cols-3 divide-y-3 md:divide-y-0 md:divide-x-3 divide-slate-400 gap-6">
         <Gauge value={240 - totalTime} />
@@ -102,6 +106,16 @@ export default async function Home() {
           <tr className="bg-slate-100 dark:bg-slate-700">
             <th className="w-2/12 text-black">{t("entries")}</th>
           </tr>
+          {thePackage.carried > 0 && (
+          <tr key={thePackage.id} className="border-b border-gray-300 dark:border-gray-700 bg-cyan-100 pb-2">
+            <td className="bg-cyan-100 pl-4 mb-4">
+            <p>
+              <span className="text-black dark:text-slate-700 font-semibold">{t("amount_carried_forward")}:&nbsp;&nbsp;</span>
+              {thePackage.carried} min.
+            </p>
+          </td>
+          </tr>
+          )}
           {rows.map((row) => {
             return (
               <tr key={row.id}>
