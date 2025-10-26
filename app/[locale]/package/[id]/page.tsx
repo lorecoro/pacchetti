@@ -33,7 +33,7 @@ export default async function Page(props: Props) {
   }));
   let totalTime = thePackage.carried;
 
-  const renderedList = entries.map((item) => {
+  const renderedList = (layout: 'single' | 'multi') => entries.map((item) => {
     const formatOptions: Intl.DateTimeFormatOptions = {
       timeZone,
       year: "numeric",
@@ -47,15 +47,28 @@ export default async function Page(props: Props) {
     const diffMilliseconds = Math.abs(item.start.getTime() - item.end.getTime());
     const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
     totalTime += diffMinutes;
-  
-    return (
-      <tr key={item.id}>
-        <td className="py-8">{startDate}</td>
-        <td className="py-8">{endDate}</td>
-        <td className="py-8">{diffMinutes} min.</td>
-        <td className="py-8">{item.name}</td>
-      </tr>
-    )
+
+    if (layout === 'multi') {
+      return (
+        <tr key={item.id}>
+          <td className="py-8">{startDate}</td>
+          <td className="py-8">{endDate}</td>
+          <td className="py-8">{diffMinutes} min.</td>
+          <td className="py-8">{item.name}</td>
+        </tr>
+      )
+    } else {
+      return (
+        <tr key={item.id}>
+          <td className="py-4">
+            <p className="font-semibold">{t("start")}:&nbsp;&nbsp;{startDate}</p>
+            <p className="font-semibold">{t("end")}:&nbsp;&nbsp;{endDate}</p>
+            <p className="font-semibold">{t("time")}:&nbsp;&nbsp;{diffMinutes} min.</p>
+            <p className="font-semibold">{t("name")}:&nbsp;&nbsp;{item.name}</p>
+          </td>
+        </tr>
+      )
+    }
   });
 
   return (
@@ -63,7 +76,33 @@ export default async function Page(props: Props) {
       <div className="py-6">
         <h1>{t("package")} {thePackage.name}</h1>
       </div>
-      <table className="w-full">
+      {/* single-column table for small screens */}
+      <table className="w-full table-fixed min-w-full inset-0 md:hidden">
+        <tbody>
+          {/* top line with carried forward */}
+          <tr>
+            <td className="bg-cyan-100 pl-4 mb-4">
+              <p>
+                <span className="text-black dark:text-slate-700 font-semibold">{t("amount_carried_forward")}:&nbsp;&nbsp;</span>
+                {thePackage.carried} min.
+              </p>
+            </td>
+          </tr>
+          {/* entries */}
+          {renderedList('single')}
+          {/* totals line */}
+          <tr>
+            <td className="bg-cyan-100 pl-4 mb-4">
+              <p>
+                <span className="text-black dark:text-slate-700 font-semibold">{t("total_time_used")}:&nbsp;&nbsp;</span>
+                {totalTime} min.
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {/* multi-column table for medium and larger screens */}
+      <table className="w-full table-fixed min-w-full absolute inset-0 invisible md:static md:visible">
         <thead className="bg-slate-250 dark:bg-slate-700">
           <tr>
             <th className="w-2/12">{t("start")}</th>
@@ -79,7 +118,7 @@ export default async function Page(props: Props) {
             <td className="py-8">{thePackage.carried} min.</td>
             <td className="py-8">{t("amount_carried_forward")}</td>
           </tr>
-          {renderedList}
+          {renderedList('multi')}
         </tbody>
         <tfoot className="bg-slate-250 dark:bg-slate-700">
           <tr className="bg-cyan-100 border-t-4">
