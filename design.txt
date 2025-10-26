@@ -22,5 +22,6 @@ admin: xyz@libero.it
 customer: abc@gmail.com
 
 improvements:
+- custom login form for i18n (see gemini)
 - find some data grid components to edit stuff
 - favicon
