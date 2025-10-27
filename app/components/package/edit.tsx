@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { UpdatePackage } from "@/actions/package-update";
 import { useTranslations } from "next-intl";
@@ -18,13 +18,11 @@ interface Props {
 }
 
 export default function EditButton(props: Props) {
-  const [formState, action] = useFormState(UpdatePackage, { errors: {} });
+  const [formState, action] = useActionState(UpdatePackage, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("edit_package");
   const editButton = (
-    <button type="submit" className="align-middle">
-      <PencilIcon className="w-5"/>
-    </button>
+    <PencilIcon className="w-5"/>
   );
 
   return (

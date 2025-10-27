@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { CreateEntry } from "@/actions/entry-create";
 import { useTranslations } from "next-intl";
 import EntryForm from "./form";
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function NewEntry(props: Props) {
-  const [formState, action] = useFormState(CreateEntry, { errors: {} });
+  const [formState, action] = useActionState(CreateEntry, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("new_entry");
   const { packages } = props;

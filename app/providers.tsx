@@ -10,7 +10,7 @@ interface Props {
 
 export default function Providers({ children }: Props) {
   return (
-    <SessionProvider refetchInterval={60}>
+    <SessionProvider refetchInterval={120} refetchOnWindowFocus={false}>
       <NextUIProvider>
         {children}
       </NextUIProvider>

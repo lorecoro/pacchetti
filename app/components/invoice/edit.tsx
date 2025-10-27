@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { UpdateInvoice } from "@/actions/invoice-update";
 import { useTranslations } from "next-intl";
@@ -23,13 +23,13 @@ interface Props {
 }
 
 export default function EditButton(props: Props) {
-  const [formState, action] = useFormState(UpdateInvoice, { errors: {} });
+  const [formState, action] = useActionState(UpdateInvoice, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("edit_invoice");
   const editButton = (
-    <button type="submit" className="align-middle">
-      <PencilIcon className="w-5 text-black"/>
-    </button>
+    // <button type="submit" className="align-middle">
+      <PencilIcon className="w-5"/>
+    // </button>
   );
 
   return (

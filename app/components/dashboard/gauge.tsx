@@ -11,7 +11,7 @@ interface GaugeProps {
 export default function Gauge(props: GaugeProps) {
   const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: false });
   return (
-    <div className="py-6 px-8">
+    <div className="sm:pb-6 md:py-6 px-6 md:px-2">
       <GaugeComponent
         value={props.value ?? 0}
         type="radial"
@@ -34,7 +34,7 @@ export default function Gauge(props: GaugeProps) {
           tickLabels: {
             type: 'outer',
             defaultTickValueConfig: {
-              style: {fontSize: 30, color: '#000', fontWeight: 'bold'}
+              style: {fontSize: 18, color: '#000', fontWeight: 'bold'}
             }
           }
         }}

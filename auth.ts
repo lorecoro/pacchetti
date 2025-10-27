@@ -5,6 +5,10 @@ import { db } from "@/db";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
+  session: {
+    strategy: "jwt",
+    maxAge: 3 * 24 * 60 * 60, // 3 days
+  },
   providers: [
     Nodemailer({
       server: {

@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { CreateInvoice } from "@/actions/invoice-create";
 import { useTranslations } from "next-intl";
 import InvoiceForm from "./form";
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function NewInvoice(props: Props) {
-  const [formState, action] = useFormState(CreateInvoice, { errors: {} });
+  const [formState, action] = useActionState(CreateInvoice, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("new_invoice");
   const { companies } = props;

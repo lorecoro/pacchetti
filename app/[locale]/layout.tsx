@@ -26,13 +26,22 @@ export async function generateMetadata({ locale }: Params) {
   };
 }
 
-export default async function RootLayout({
-  children,
-  params: { locale }
-}: Readonly<{
-  children: React.ReactNode;
-  params: { locale: string };
-}>) {
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+    params: { locale: string };
+  }>
+) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const {
+    children
+  } = props;
+
   // Receive messages provided in `i18n/request.ts`
   const messages = await getMessages();
 
@@ -48,8 +57,8 @@ export default async function RootLayout({
               <div className="grid col-span-1 block lg:hidden">
                 <Topbar />
               </div>
-              <div className="grid col-span-5">
-                <div className="w-full border-medium px-4 py-4 rounded-small border-default-400 dark:border-default-100">
+              <div className="grid col-span-1 lg:col-span-5">
+                <div className="w-full max-w-10/10 border-medium px-4 py-4 rounded-small border-default-400 dark:border-default-100">
                   {children}
                 </div>
               </div>

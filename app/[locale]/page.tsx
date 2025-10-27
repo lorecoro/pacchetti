@@ -21,7 +21,6 @@ export default async function Home() {
         </div>
         <div>
           <p>{t("to_use_this_app")}</p>
-          <p>{t("please_sign_in")}</p>
         </div>
       </div>
     );
@@ -76,15 +75,19 @@ export default async function Home() {
   });
 
   const content = thePackage ? (
-    <div>
-      <div className="py-6">
+    <div className="w-full">
+      <div className="pt-6">
         <h1>{t("dashboard")}</h1>
       </div>
       <div className="py-6 grid grid-cols-1 md:grid-cols-2 max-w-5/6">
-        <h2 className="text-xl font-500 pt-6 md:border-t-2 border-slate-400">{t("current_package")} {thePackage.name}</h2>
-        <h2 className="text-xl font-500 py-6 md:pl-6 border-t-2 md:border-l-2 border-slate-400">{invoiceName}</h2>
+        <h2 className="text-xl font-500 pt-6 md:border-t-2 border-slate-400">
+          {t("current_package")}&nbsp;&nbsp;<span className="font-semibold">{thePackage.name}</span>
+        </h2>
+        <h2 className="text-xl font-500 py-6 md:pl-6 border-t-2 md:border-l-2 border-slate-400">
+          {invoiceName}
+        </h2>
       </div>
-      <div className="py-6 grid grid-cols-1 md:grid-cols-3 divide-x-3 divide-slate-400 gap-6">
+      <div className="py-6 grid grid-cols-1 md:grid-cols-3 divide-y-3 md:divide-y-0 md:divide-x-3 divide-slate-400 gap-6">
         <Gauge value={240 - totalTime} />
         <Kpi
           label={t("used")}
@@ -97,17 +100,52 @@ export default async function Home() {
           value={240 - totalTime}
         />
       </div>
-      <table className="w-full">
+      {/* single-column table for small screens */}
+      <table className="w-full block md:hidden">
+        <tbody className="w-screen">
+          <tr className="bg-slate-100 dark:bg-slate-700">
+            <th className="w-2/12 text-black">{t("entries")}</th>
+          </tr>
+          {thePackage.carried > 0 && (
+          <tr key={thePackage.id} className="border-b border-gray-300 dark:border-gray-700 bg-cyan-100 pb-2">
+            <td className="bg-cyan-100 pl-4 mb-4">
+            <p>
+              <span className="text-black dark:text-slate-700 font-semibold">{t("amount_carried_forward")}:&nbsp;&nbsp;</span>
+              {thePackage.carried} min.
+            </p>
+          </td>
+          </tr>
+          )}
+          {rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                <td>
+                  <p><span className="text-black dark:text-slate-700">{t("date")}:</span>&nbsp;&nbsp;{row.startDate}</p>
+                  <p><span className="text-black dark:text-slate-700">{t("description")}:</span>&nbsp;&nbsp;{row.name}</p>
+                  <p><span className="text-black dark:text-slate-700">{t("start")}:</span>&nbsp;&nbsp;{row.startTime}</p>
+                  <p><span className="text-black dark:text-slate-700">{t("end")}:</span>&nbsp;&nbsp;{row.endTime}</p>
+                  <p><span className="text-black dark:text-slate-700">{t("time")}:</span>&nbsp;&nbsp;{row.diffMinutes} min.</p>
+                </td>
+              </tr>
+            )
+          })}
+          <tr className="bg-cyan-100 border-t-3">
+            <th className="w-2/12 text-black">{t("total_time_used")}&nbsp;&nbsp;{totalTime} min.</th>
+          </tr>
+        </tbody>
+      </table>
+      {/* multi-column table for medium and larger screens */}
+      <table className="w-full table-fixed min-w-full absolute inset-0 invisible md:static md:visible">
         <thead>
           <tr className="bg-slate-100 dark:bg-slate-700">
-            <th className="w-2/12">{t("date")}</th>
-            <th className="w-4/12">{t("description")}</th>
-            <th className="w-2/12">{t("start")}</th>
-            <th className="w-2/12">{t("end")}</th>
-            <th className="w-2/12">{t("time")}</th>
+            <th className="w-1/6">{t("date")}</th>
+            <th className="w-2/6">{t("description")}</th>
+            <th className="w-1/6">{t("start")}</th>
+            <th className="w-1/6">{t("end")}</th>
+            <th className="w-1/6">{t("time")}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="w-full">
           {thePackage.carried > 0 && (
           <tr key={thePackage.id} className="border-b border-gray-300 dark:border-gray-700 bg-cyan-100 pb-2">
             <td>-</td>
@@ -129,7 +167,7 @@ export default async function Home() {
             )
           })}
         </tbody>
-        <tfoot className="bg-slate-250 dark:bg-slate-700">
+        <tfoot className="w-full bg-slate-250 dark:bg-slate-700">
           <tr className="bg-cyan-100 border-t-3">
             <th className="w-2/12"></th>
             <th className="w-4/12 text-black">{t("total_time_used")}</th>

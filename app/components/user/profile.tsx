@@ -1,3 +1,5 @@
+// app/components/user/user.tsx
+
 'use client';
 
 import { useSession } from "next-auth/react";

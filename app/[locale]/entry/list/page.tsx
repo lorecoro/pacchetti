@@ -95,6 +95,11 @@ export default async function Page() {
       <div className="py-6">
         <h1>{t("entries")}</h1>
       </div>
+      { admin &&
+        <div className="mt-4 w-4/12">
+          <NewEntry packages={packages}/>
+        </div>
+      }
       <table className="w-full">
         <thead className="bg-slate-250 dark:bg-slate-700">
           <tr>
@@ -111,11 +116,6 @@ export default async function Page() {
           {renderedList}
         </tbody>
       </table>
-      { admin &&
-        <div className="mt-4 w-4/12">
-          <NewEntry packages={packages}/>
-        </div>
-      }
     </div>
   )
 }

@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { UpdateEntry } from "@/actions/entry-update";
 import { useTranslations } from "next-intl";
@@ -22,21 +22,20 @@ interface Props {
 }
 
 export default function EditButton(props: Props) {
-  const [formState, action] = useFormState(UpdateEntry, { errors: {} });
+  const { entry, packages } = props;
+  const [formState, action] = useActionState(UpdateEntry, { errors: {} });
   const t = useTranslations("ui");
   const caption = t("edit_entry");
   const editButton = (
-    <button type="submit" className="align-middle">
-      <PencilIcon className="w-5"/>
-    </button>
+    <PencilIcon className="w-5"/>
   );
 
   const theEntry = {
-    id: props.entry.id,
-    start: props.entry.start ? formatISO(parse(props.entry.start, "MM/dd/yyyy, HH:mm", new Date())) : "",
-    end: props.entry.end ? formatISO(parse(props.entry.end, "MM/dd/yyyy, HH:mm", new Date())) : "",
-    name: props.entry.name,
-    packageId: props.entry.packageId
+    id: entry.id,
+    start: entry.start ? formatISO(parse(entry.start, "dd/MM/yyyy, HH:mm", new Date())) : "",
+    end: entry.end ? formatISO(parse(entry.end, "dd/MM/yyyy, HH:mm", new Date())) : "",
+    name: entry.name,
+    packageId: entry.packageId
   }
 
   return (
@@ -44,7 +43,7 @@ export default function EditButton(props: Props) {
       caption={caption}
       icon={editButton}
       action={action}
-      packages={props.packages}
+      packages={packages}
       theEntry={theEntry}
       errors={formState?.errors}
     />
