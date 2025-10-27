@@ -24,6 +24,7 @@ customer: abc@gmail.com
 improvements:
 - custom login form for i18n (see gemini)
 - replace react-gauge-componentn with recharts (which is compatible with react19)
+- replace deprecated @nextui.org packages with @heroui
 - find some data grid components to edit stuff
 - favicon
 - profile page
