@@ -9,10 +9,10 @@ import DetailsButton from "@/app/components/package/details";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { Package } from "@prisma/client";
-import type { itemForClient } from './page';
+import type { entryFromQuery, itemFromQuery, itemForClient } from './page';
 
 interface Props {
-  item: any;
+  item: itemFromQuery;
   clientItem: itemForClient;
   companies: { id: string; name: string }[];
   invoices: { id: string; number: string }[];
@@ -46,7 +46,7 @@ export default function Row(props: Props) {
   let totalTime = thePackage.carried;
 
   const entryRows = (layout: 'single' | 'multi') => {
-    return clientItem.entries?.map((entry: any) => {
+    return clientItem.entries?.map((entry: entryFromQuery) => {
       const formatOptions: Intl.DateTimeFormatOptions = {
         timeZone,
         year: "numeric",

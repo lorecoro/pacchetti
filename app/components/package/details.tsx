@@ -3,7 +3,6 @@
 'use client';
 
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
 
 interface Props {
   onClick: () => void;
@@ -11,7 +10,6 @@ interface Props {
 
 export default function DetailsButton(props: Props) {
   const { onClick } = props;
-  const t = useTranslations("ui");
 
   return (
     <button className="pl-4" onClick={onClick}>

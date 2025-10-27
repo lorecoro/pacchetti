@@ -11,11 +11,59 @@ import { fetchCompaniesIdName } from "@/actions/company-list";
 import { fetchInvoicesIdNumber } from "@/actions/invoice-list";
 import { getUserCompanyId, isAdmin, isAuthenticated } from "@/actions/user";
 
+export type itemFromQuery = {
+    company: {
+        name: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        price: number;
+    };
+    invoice: {
+        number: string;
+        id: string;
+        companyId: string;
+        createdAt: Date;
+        updatedAt: Date;
+        date: Date;
+        amount: number;
+        payment: string;
+        paid: boolean;
+    } | null;
+    entries: {
+        name: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        start: Date;
+        end: Date;
+        packageId: string;
+    }[];
+} & {
+    name: string;
+    id: string;
+    companyId: string;
+    invoiceId: string | null;
+    carried: number;
+    createdAt: Date;
+    updatedAt: Date;
+};
+
+export type entryFromQuery = {
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+  start: Date;
+  end: Date;
+  packageId: string;
+};
+
 export type itemForClient = {
   id: string;
   name: string;
   carried: number;
-  entries?: any[];
+  entries?: entryFromQuery[];
   invoiceName: string | null;
   companyName: string | null;
 };
@@ -69,7 +117,7 @@ export default async function Page() {
       invoiceName: invoiceName,
       companyName: item.company ? item.company.name : null
     };
-    const parsedItem = JSON.parse(JSON.stringify(item));
+    const parsedItem: itemFromQuery = JSON.parse(JSON.stringify(item));
     return <Row
       key={item.id}
       item={parsedItem}

@@ -7,6 +7,7 @@ import Sidebar from '@/app/components/common/sidebar';
 import Topbar from '@/app/components/common/topbar';
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from 'next-intl/server';
+import { ReactNode } from 'react';
 
 const font = localFont({
   // src: "./fonts/LTInternet-Regular.ttf"
@@ -26,21 +27,13 @@ export async function generateMetadata({ locale }: Params) {
   };
 }
 
-export default async function RootLayout(
-  props: Readonly<{
-    children: React.ReactNode;
-    params: { locale: string };
-  }>
-) {
-  const params = await props.params;
+type Props = {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+};
 
-  const {
-    locale
-  } = params;
-
-  const {
-    children
-  } = props;
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
 
   // Receive messages provided in `i18n/request.ts`
   const messages = await getMessages();

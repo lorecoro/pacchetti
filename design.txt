@@ -1,15 +1,15 @@
-page name     path            data                                                   data changes pages to revalidate access
-------------- --------------- ------------------------------------------------------ ------------ ------------------- ------
-home          /               last package, with entries and invoice                 no                               all
-companies     /company/list   list of companies                                      no                               admin
-(new company) |-(popover)     form with name and price                               yes          new invoice         admin
-invoices      /invoice/list   list of invoices                                       no                               all
-(new invoice) |-(popover)     form with number, date, company, amount, payment, paid yes          home                admin
-packages      /package/list   list of packages                                       no                               all
-package       /package/[name] one package with entries                               no           dynamic             all
-new package   |-(popover)     form with payment selection                            yes          home, packages      all
-profile       /profile        user and company                                       no                               all
-new entry     /entry/new      form with start, end, name and package id as argument  yes          hpme, package       admin
+page name     path                data                                                   data changes pages to revalidate access
+------------- ------------------- ------------------------------------------------------ ------------ ------------------- ------
+dashboard     /                   last package, with entries and invoice                 no                               all
+companies     /admin/company/list list of companies                                      no                               admin
+(new company) |-(popover)         form with name and price                               yes          new invoice         admin
+invoices      /invoice/list       list of invoices                                       no                               all
+(new invoice) |-(popover)         form with number, date, company, amount, payment, paid yes          dashboard           admin
+packages      /package/list       list of packages                                       no                               all
+package       /package/[id]       one package with entries                               no           dynamic             all
+new package   /package/new        form with payment selection                            yes          dashboard, packages all
+profile       /profile            user and company                                       no                               all
+entries       /entry/list         form with start, end, name and package id as argument  yes          dashboard, package  admin
 
 
 
@@ -26,3 +26,4 @@ improvements:
 - replace react-gauge-componentn with recharts (which is compatible with react19)
 - find some data grid components to edit stuff
 - favicon
+- profile page
