@@ -18,7 +18,7 @@ export default async function Page(props: Props) {
   const { id } = params;
   const locale = await getLocale();
   const t = await getTranslations("ui");
-  let timeZone = 'Europe/Rome';
+  const timeZone = 'Europe/Rome';
 
   const thePackage: Package | null = await db.package.findUnique({
     where: { id: id }
@@ -31,7 +31,13 @@ export default async function Page(props: Props) {
     where: { packageId: thePackage.id },
     orderBy: [{start: 'asc'}]
   }));
+
   let totalTime = thePackage.carried;
+  totalTime += entries.reduce((acc, item) => {
+    const diffMilliseconds = Math.abs(item.start.getTime() - item.end.getTime());
+    const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
+    return acc + diffMinutes;
+  }, 0);
 
   const renderedList = (layout: 'single' | 'multi') => entries.map((item) => {
     const formatOptions: Intl.DateTimeFormatOptions = {
@@ -46,7 +52,6 @@ export default async function Page(props: Props) {
     const endDate = item.end.toLocaleString(locale, formatOptions);
     const diffMilliseconds = Math.abs(item.start.getTime() - item.end.getTime());
     const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
-    totalTime += diffMinutes;
 
     if (layout === 'multi') {
       return (
