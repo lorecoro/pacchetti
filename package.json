@@ -6,10 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^2.7.2",
+    "@auth/core": "^0.41.1",
+    "@auth/prisma-adapter": "^2.11.1",
     "@heroicons/react": "^2.1.5",
     "@nextui-org/checkbox": "^2.3.3",
     "@nextui-org/date-picker": "^2.3.3",
@@ -19,11 +20,12 @@
     "@prisma/client": "^5.19.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.24",
+    "glob": "^13.0.0",
     "luxon": "^3.5.0",
-    "next": "^15.5.0",
+    "next": "^16.0.5",
     "next-auth": "^5.0.0-beta.30",
-    "next-intl": "^3.24.0",
-    "nodemailer": "^7.0.7",
+    "next-intl": "^4.5.6",
+    "nodemailer": "^7.0.10",
     "prisma": "^5.19.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -31,12 +33,15 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "16.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.48.0",
+    "@typescript-eslint/parser": "^8.48.0",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.0.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
