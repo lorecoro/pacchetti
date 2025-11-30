@@ -22,9 +22,23 @@ admin: xyz@libero.it
 customer: abc@gmail.com
 
 improvements:
+- https://nextjs.org/docs/messages/middleware-to-proxy
 - custom login form for i18n (see gemini)
 - replace react-gauge-componentn with recharts (which is compatible with react19)
 - replace deprecated @nextui.org packages with @heroui
 - find some data grid components to edit stuff
 - favicon
 - profile page
+
+deployment:
+./sshcpx21
+su -
+cd /var/www/pacchetti.xyz.com/
+pm2 status
+pm2 stop 2
+git pull
+npm i
+npx prisma generate
+rm -rf .next
+npm run build
+pm2 reload /etc/pm2/ecosystem.config.yml

@@ -5,6 +5,7 @@ import { db } from "@/db";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
+  trustHost: true,
   session: {
     strategy: "jwt",
     maxAge: 3 * 24 * 60 * 60, // 3 days
