@@ -7,7 +7,7 @@ import { Checkbox } from "@nextui-org/checkbox";
 import { DatePicker } from "@nextui-org/date-picker";
 import { I18nProvider } from "@react-aria/i18n";
 import { Input } from "@nextui-org/react";
-import { parse, formatISO } from 'date-fns';
+import { parse, format, formatISO } from 'date-fns';
 import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import { ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -48,6 +48,17 @@ type SelectArray = {
 export default function InvoiceForm(props: Props) {
   const { caption, icon, action, companies, invoice, errors} = props;
   const t = useTranslations("ui");
+  const incomingDateFormat = 'MM/dd/yyyy';
+
+  const parseIncomingDate = (dateString: string) => {
+    if (!dateString) return today(getLocalTimeZone());
+    const parsedDate = parse(dateString, incomingDateFormat, new Date());
+    if (isNaN(parsedDate.getTime())) {
+      return today(getLocalTimeZone());
+    }
+    const isoDateString = format(parsedDate, 'yyyy-MM-dd');
+    return parseDate(isoDateString);
+  };
 
   const companySelect: SelectArray[] = companies.map((company) => {
     return {key: company.id, label: company.name}
@@ -80,7 +91,7 @@ export default function InvoiceForm(props: Props) {
     accordionProps.title = caption;
     accordionProps.variant = 'splitted';
   }
-
+console.log(invoice?.date);
   return (
     <Accordion>
       <AccordionItem key="1" {...accordionProps}>
@@ -108,11 +119,7 @@ export default function InvoiceForm(props: Props) {
             name="date"
             label={t("date")}
             labelPlacement="outside"
-            defaultValue={
-              invoice?.date
-              ? parseDate(formatISO(parse(invoice.date, 'dd/MM/yyyy', new Date()), { representation: 'date' }))
-              : today(getLocalTimeZone())
-            }
+            defaultValue={parseIncomingDate(invoice?.date || '')}
             isInvalid={!!errors?.date}
             errorMessage={errors?.date?.join(', ')}
           />
