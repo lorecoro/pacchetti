@@ -79,6 +79,7 @@ export default async function Sidebar() {
       }
 
       <User />
+      <div className="h-6 text-right text-gray-400 text-sm">v. 25.11.30</div>
     </div>
   );
 }
