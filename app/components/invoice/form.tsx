@@ -91,7 +91,7 @@ export default function InvoiceForm(props: Props) {
     accordionProps.title = caption;
     accordionProps.variant = 'splitted';
   }
-console.log(invoice?.date);
+
   return (
     <Accordion>
       <AccordionItem key="1" {...accordionProps}>
