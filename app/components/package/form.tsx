@@ -22,7 +22,7 @@ interface Props {
     id: string;
     companyId: string;
     invoiceId: string | null;
-    carried: number;
+    carried: number | null;
     createdAt: Date;
     updatedAt: Date;
   };
@@ -118,7 +118,7 @@ export default function PackageForm(props: Props) {
             label={t("amount_carried_forward")}
             labelPlacement="outside"
             placeholder={t("amount_carried_forward")}
-            defaultValue={typeof thePackage?.carried === 'number' ? thePackage?.carried.toFixed(0) : thePackage?.carried}
+            defaultValue={(thePackage?.carried ?? 0).toFixed(0)}
             isInvalid={!!errors?.carried}
             errorMessage={errors?.carried?.join(', ')}
           />

@@ -43,7 +43,7 @@ export default function Row(props: Props) {
   if (admin) {
     timeZone = 'Europe/Helsinki';
   }
-  let totalTime = thePackage.carried;
+  let totalTime = thePackage?.carried ?? 0;
 
   const entryRows = (layout: 'single' | 'multi') => {
     return clientItem.entries?.map((entry: entryFromQuery) => {

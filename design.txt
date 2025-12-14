@@ -35,9 +35,9 @@ deployment:
 su -
 sudo -u nodeapp -H bash
 cd
-cd pacchetti/
 node_modules/.bin/pm2 status
 node_modules/.bin/pm2 stop 2
+cd pacchetti/
 git pull
 npm i
 npx prisma generate

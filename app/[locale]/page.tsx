@@ -44,7 +44,7 @@ export default async function Home() {
     where: { packageId: thePackage.id },
     orderBy: [{ start: 'asc' }],
   }) : [];
-  let totalTime = thePackage ? thePackage.carried : 0;
+  let totalTime = thePackage?.carried ?? 0;
   const timeZone = 'Europe/Rome';
   const dateFormatOptions: Intl.DateTimeFormatOptions = {
     timeZone,
@@ -106,7 +106,7 @@ export default async function Home() {
           <tr className="bg-slate-100 dark:bg-slate-700">
             <th className="w-2/12 text-black">{t("entries")}</th>
           </tr>
-          {thePackage.carried > 0 && (
+          {(thePackage.carried ?? 0) > 0 && (
           <tr key={thePackage.id} className="border-b border-gray-300 dark:border-gray-700 bg-cyan-100 pb-2">
             <td className="bg-cyan-100 pl-4 mb-4">
             <p>
@@ -146,7 +146,7 @@ export default async function Home() {
           </tr>
         </thead>
         <tbody className="w-full">
-          {thePackage.carried > 0 && (
+          {(thePackage.carried ?? 0)> 0 && (
           <tr key={thePackage.id} className="border-b border-gray-300 dark:border-gray-700 bg-cyan-100 pb-2">
             <td>-</td>
             <td>-</td>

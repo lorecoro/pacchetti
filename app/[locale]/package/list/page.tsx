@@ -112,7 +112,7 @@ export default async function Page() {
     const clientItem: itemForClient = {
       id: item.id,
       name: item.name,
-      carried: item.carried,
+      carried: item.carried ?? 0,
       entries: item.entries,
       invoiceName: invoiceName,
       companyName: item.company ? item.company.name : null

@@ -32,7 +32,7 @@ export default async function Page(props: Props) {
     orderBy: [{start: 'asc'}]
   }));
 
-  let totalTime = thePackage.carried;
+  let totalTime = thePackage?.carried ?? 0;
   totalTime += entries.reduce((acc, item) => {
     const diffMilliseconds = Math.abs(item.start.getTime() - item.end.getTime());
     const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
