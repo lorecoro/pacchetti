@@ -25,7 +25,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if(user) {
+      if (user) {
+        (token as any).id = user.id;
+        (token as any).sub = user.id;
         const userWithRole = await db.user.findUnique({
           where: { id: user.id },
           select: { role: true },
@@ -35,11 +37,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (!token?.sub) {
-        return session;
-      }
+      const id = token?.sub ?? (token as any).id;
+      if (!id) return session;
+      if (!session.user) session.user = {} as any;
+      session.user.id = id;
       const userWithRole = await db.user.findUnique({
-        where: { id: token?.sub },
+        where: { id },
         select: { role: true },
       })
       session.user.role = userWithRole ? userWithRole.role.toString() : 'user';

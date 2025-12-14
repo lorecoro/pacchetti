@@ -33,12 +33,14 @@ improvements:
 deployment:
 ./sshcpx21
 su -
-cd /var/www/pacchetti.xyz.com/
-pm2 status
-pm2 stop 2
+sudo -u nodeapp -H bash
+cd
+cd pacchetti/
+node_modules/.bin/pm2 status
+node_modules/.bin/pm2 stop 2
 git pull
 npm i
 npx prisma generate
 rm -rf .next
 npm run build
-pm2 reload /etc/pm2/ecosystem.config.yml
+node_modules/.bin/pm2 reload ../ecosystem.config.yml
