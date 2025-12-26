@@ -31,7 +31,7 @@ improvements:
 - profile page
 
 deployment:
-./sshcpx21
+./sshcx33
 su -
 sudo -u nodeapp -H bash
 cd
@@ -43,4 +43,5 @@ npm i
 npx prisma generate
 rm -rf .next
 npm run build
-node_modules/.bin/pm2 reload ../ecosystem.config.yml
+cd ..
+node_modules/.bin/pm2 reload ecosystem.config.yml
