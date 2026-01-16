@@ -2,7 +2,6 @@
 
 import { auth, signIn, signOut } from "@/auth"
 import { db } from "@/db";
-import { compareAsc } from "date-fns";
 
 export async function logIn() {
   return signIn();

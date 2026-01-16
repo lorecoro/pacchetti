@@ -22,6 +22,8 @@ admin: xyz@libero.it
 customer: abc@gmail.com
 
 improvements:
+- bug with english version of entries list
+- deployment with github actions
 - custom login form for i18n (see gemini)
 - replace react-gauge-componentn with recharts (which is compatible with react19)
 - replace deprecated @nextui.org packages with @heroui

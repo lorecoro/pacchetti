@@ -24,6 +24,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     })
   ],
   callbacks: {
+    async signIn({ user }) {
+      const existingUser = await db.user.findUnique({
+        where: { email: user.email! },
+      });
+
+      if (existingUser) {
+        console.log("User signing in:", user.email);
+        return true;
+      }
+      else {
+        console.log("Unrecognized user:", user.email);
+        return false;
+      }
+    },
     async jwt({ token, user }) {
       if (user) {
         (token as any).id = user.id;
