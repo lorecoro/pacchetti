@@ -29,7 +29,7 @@
     "prisma": "^5.19.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-gauge-component": "^1.2.64",
+    "react-gauge-component": "^2.0.26",
     "sharp": "^0.34.5",
     "zod": "^3.23.8"
   },
