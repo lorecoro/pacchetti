@@ -32,17 +32,4 @@ improvements:
 - profile page
 
 deployment:
-ssh user@host
-su -
-sudo -u nodeapp -H bash
-cd
-./pm2 status
-./pm2 stop 2
-cd pacchetti/
-git pull
-npm i
-npx prisma generate
-rm -rf .next
-npm run build
-cd ..
-./pm2 reload ecosystem.config.yml
+via GitHub actions and the deploy.sh script
