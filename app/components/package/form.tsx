@@ -111,7 +111,7 @@ export default function PackageForm(props: Props) {
             isInvalid={!!errors?.companyId}
             errorMessage={errors?.companyId?.join(', ')}
           >
-            {(company) => <SelectItem key={company.key} textValue={company.label}>{company.label}</SelectItem>}
+            {(company) => <SelectItem key={company.key} textValue={company.label} style={{ color: 'black' }}>{company.label}</SelectItem>}
           </Select>
           <Input
             name="carried"
@@ -133,7 +133,7 @@ export default function PackageForm(props: Props) {
             isInvalid={!!errors?.invoiceId}
             errorMessage={errors?.invoiceId?.join(', ')}
           >
-            {(invoice) => <SelectItem key={invoice.key} textValue={invoice.label}>{invoice.label}</SelectItem>}
+            {(invoice) => <SelectItem key={invoice.key} textValue={invoice.label} style={{ color: 'black' }}>{invoice.label}</SelectItem>}
           </Select>
 
           {errors?._form ? <div className="text-red">{errors?._form.join(', ')}</div> : null}

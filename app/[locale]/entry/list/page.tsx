@@ -4,11 +4,13 @@
 
 import EditButton from "@/app/components/entry/edit";
 import DeleteButton from "@/app/components/entry/delete";
+import paths from "@/paths";
 import { db } from "@/db";
 import { getLocale, getTranslations } from "next-intl/server";
 import { fetchPackagesIdName } from "@/actions/package-list";
 import { getUserCompanyId, isAdmin, isAuthenticated } from "@/actions/user";
 import NewEntry from "@/app/components/entry/new";
+import Link from "next/link";
 
 export default async function Page() {
   const locale = await getLocale();
@@ -46,6 +48,8 @@ export default async function Page() {
     return null;
   }
 
+  const { onePackage } = await paths();
+
   const renderedList = entries.map((item) => {
     const formatOptions: Intl.DateTimeFormatOptions = {
       timeZone,
@@ -62,8 +66,8 @@ export default async function Page() {
     const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60));
     const theEntry = {
       id: item.id,
-      start: startDate,
-      end: endDate,
+      start: item.start ? item.start.toISOString() : "",
+      end: item.end ? item.end.toISOString() : "",
       name: item.name,
       packageId: item.packageId,
       createdAt: item.createdAt,
@@ -85,7 +89,11 @@ export default async function Page() {
         <td className="py-8">{endDate}</td>
         <td className="py-8">{diffMinutes} min.</td>
         <td className="py-8">{item.name}</td>
-        <td className="py-8">{item.package.name}</td>
+        <td className="py-8">
+          <Link className="hover:underline" href={onePackage(item.packageId)}>
+            {item.package.name}
+          </Link>
+        </td>
       </tr>
     )
   });

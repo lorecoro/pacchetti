@@ -41,9 +41,12 @@ export default function EntryForm(props: Props) {
   const { caption, icon, action, packages, theEntry, errors } = props;
   const t = useTranslations("ui");
 
-  const packageSelect: SelectArray[] = packages.map((item) => {
-    return {key: item.id, label: item.name}
-  });
+  const packageSelect: SelectArray[] = packages
+    .slice()               // create a copy of the array to avoid mutating the original
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((item) => {
+      return {key: item.id, label: item.name}
+    });
   const [selectedPackage, setSelectedPackage] = useState<Selection>(
     theEntry?.packageId ? new Set([theEntry.packageId]) : new Set([])
   );
@@ -128,7 +131,7 @@ export default function EntryForm(props: Props) {
             isInvalid={!!errors?.packageId}
             errorMessage={errors?.packageId?.join(', ')}
           >
-            {(item) => <SelectItem key={item.key} textValue={item.label}>{item.label}</SelectItem>}
+            {(item) => <SelectItem key={item.key} textValue={item.label} style={{ color: 'black' }}>{item.label}</SelectItem>}
           </Select>
 
           {errors?._form ? <div className="text-red">{errors?._form.join(', ')}</div> : null}

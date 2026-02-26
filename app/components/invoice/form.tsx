@@ -135,7 +135,7 @@ export default function InvoiceForm(props: Props) {
             isInvalid={!!errors?.companyId}
             errorMessage={errors?.companyId?.join(', ')}
           >
-            {(company) => <SelectItem key={company.key} textValue={company.label}>{company.label}</SelectItem>}
+            {(company) => <SelectItem key={company.key} textValue={company.label} style={{ color: 'black' }}>{company.label}</SelectItem>}
           </Select>
           <Input
             name="amount"
@@ -157,7 +157,7 @@ export default function InvoiceForm(props: Props) {
             isInvalid={!!errors?.payment}
             errorMessage={errors?.payment?.join(', ')}
           >
-            {paymentSelect.map((payment) => <SelectItem key={payment.key} textValue={payment.label}>{payment.label}</SelectItem>)}
+            {paymentSelect.map((payment) => <SelectItem key={payment.key} textValue={payment.label} style={{ color: 'black' }}>{payment.label}</SelectItem>)}
           </Select>
 
           {invoice?.paid 
