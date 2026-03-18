@@ -17,6 +17,7 @@ echo "Generating Prisma client..."
 npx prisma generate
 
 echo "Keeping previous build for rollback..."
+rm -rf .next.previous
 mv .next .next.previous
 
 echo "Building app..."
