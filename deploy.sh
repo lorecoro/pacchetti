@@ -8,7 +8,8 @@ echo "Stopping app..."
 
 echo "Updating code..."
 cd /srv/nodeapp/pacchetti
-git pull origin main
+git fetch origin
+git reset --hard origin/main
 
 echo "Installing dependencies..."
 npm ci
