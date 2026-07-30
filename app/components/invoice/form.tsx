@@ -7,7 +7,7 @@ import { Checkbox } from "@nextui-org/checkbox";
 import { DatePicker } from "@nextui-org/date-picker";
 import { I18nProvider } from "@react-aria/i18n";
 import { Input } from "@nextui-org/react";
-import { parse, format } from 'date-fns';
+import { DateTime } from "luxon";
 import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import { ReactNode, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -52,12 +52,11 @@ export default function InvoiceForm(props: Props) {
 
   const parseIncomingDate = (dateString: string) => {
     if (!dateString) return today(getLocalTimeZone());
-    const parsedDate = parse(dateString, incomingDateFormat, new Date());
-    if (isNaN(parsedDate.getTime())) {
+    const dt = DateTime.fromFormat(dateString, incomingDateFormat);
+    if (!dt.isValid) {
       return today(getLocalTimeZone());
     }
-    const isoDateString = format(parsedDate, 'yyyy-MM-dd');
-    return parseDate(isoDateString);
+    return parseDate(dt.toISODate()!);
   };
 
   const companySelect: SelectArray[] = companies.map((company) => {
