@@ -25,7 +25,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-gauge-component": "^2.0.26",
-    "sharp": "^0.35.0",
+    "sharp": "^0.35.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -42,15 +42,17 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
+  "overrides": {
+    "sharp": "^0.35.3"
+  },
   "allowScripts": {
-    "@prisma/client@5.22.0": true,
-    "prisma@5.22.0": true,
-    "unrs-resolver@1.12.2": true,
-    "sharp@0.34.5": true,
-    "sharp@0.35.3": true,
-    "@parcel/watcher@2.6.0": true,
-    "@swc/core@1.15.47": true,
-    "@prisma/engines@5.22.0": true,
-    "fsevents@2.3.3": true
+    "fsevents": true,
+    "prisma": true,
+    "sharp": true,
+    "unrs-resolver": true,
+    "@parcel/watcher": true,
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "@swc/core": true
   }
 }
