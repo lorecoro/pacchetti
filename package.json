@@ -41,7 +41,9 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
-  "overrides": {},
+  "overrides": {
+    "nodemailer": "$nodemailer"
+  },
   "allowScripts": {
     "fsevents": true,
     "prisma": true,
