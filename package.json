@@ -9,7 +9,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@auth/core": "^0.41.1",
     "@auth/prisma-adapter": "^2.11.1",
     "@heroicons/react": "^2.1.5",
     "@nextui-org/react": "^2.6.4",
