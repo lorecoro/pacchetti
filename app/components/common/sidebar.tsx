@@ -15,6 +15,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { isAdmin, isAuthenticated } from "@/actions/user";
 import { getTranslations } from "next-intl/server";
+import packageJson from "../../../package.json";
+
+const appVersion = packageJson.version;
 
 export default async function Sidebar() {
   const admin: boolean = await isAdmin();
@@ -79,7 +82,7 @@ export default async function Sidebar() {
       }
 
       <User />
-      <div className="h-6 text-right text-gray-400 text-sm">v. 26.08.28</div>
+      <div className="h-6 text-right text-gray-400 text-sm">v. {appVersion}</div>
     </div>
   );
 }
