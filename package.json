@@ -1,11 +1,12 @@
 {
   "name": "pacchetti",
-  "version": "26.9.20",
+  "version": "26.11.12",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node --experimental-strip-types --experimental-test-module-mocks --test test/entry-actions.test.mjs",
     "lint": "eslint ."
   },
   "dependencies": {

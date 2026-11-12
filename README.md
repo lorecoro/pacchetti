@@ -10,6 +10,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Tests
+
+Run the entry action unit tests with Node's built-in test runner:
+
+```bash
+npm run test
+```
+
 ## In production
 
 After
