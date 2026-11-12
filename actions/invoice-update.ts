@@ -12,13 +12,13 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  id: z.string({ required_error: 'Id is required' }),
-  number: z.string({ required_error: 'Number is required' })
+  id: z.string({ error: (issue) => issue.input === undefined ? 'Id is required' : undefined }),
+  number: z.string({ error: (issue) => issue.input === undefined ? 'Number is required' : undefined })
     .min(1),
   date: z.coerce.date(),
-  companyId: z.string({ required_error: 'Company is required' })
+  companyId: z.string({ error: (issue) => issue.input === undefined ? 'Company is required' : undefined })
     .min(3),
-  amount: z.coerce.number({ required_error: 'Amount is required' })
+  amount: z.coerce.number({ error: (issue) => issue.input === undefined ? 'Amount is required' : undefined })
     .gt(0),
   payment: z.enum(['paypal', 'bank_transfer']),
   paid: z.boolean().default(false)

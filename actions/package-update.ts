@@ -12,10 +12,10 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  id: z.string({ required_error: 'Id is required' }),
-  name: z.string({ required_error: 'Name is required' })
+  id: z.string({ error: (issue) => issue.input === undefined ? 'Id is required' : undefined }),
+  name: z.string({ error: (issue) => issue.input === undefined ? 'Name is required' : undefined })
     .min(1),
-  companyId: z.string({ required_error: 'Company is required' })
+  companyId: z.string({ error: (issue) => issue.input === undefined ? 'Company is required' : undefined })
     .min(3),
   invoiceId: z.string(),
   carried: z.coerce.number()

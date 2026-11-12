@@ -12,9 +12,9 @@ import { z } from "zod";
 import paths from "@/paths";
 
 const schema = z.object({
-  name: z.string({ required_error: 'Name is required' })
+  name: z.string({ error: (issue) => issue.input === undefined ? 'Name is required' : undefined })
     .min(3),
-  price: z.coerce.number({ required_error: 'Price is required' })
+  price: z.coerce.number({ error: (issue) => issue.input === undefined ? 'Price is required' : undefined })
     .gt(0),
 });
 

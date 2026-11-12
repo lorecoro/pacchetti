@@ -16,7 +16,7 @@ const schema = z.object({
     .min(1),
   date: z.coerce.date(),
   companyId: z.string(),
-  amount: z.coerce.number({ required_error: 'Amount is required' })
+  amount: z.coerce.number({ error: (issue) => issue.input === undefined ? 'Amount is required' : undefined })
     .gt(0),
   payment: z.enum(['paypal', 'bank_transfer']),
   paid: z.boolean().default(false)

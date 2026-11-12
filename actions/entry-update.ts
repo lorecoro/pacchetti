@@ -13,7 +13,7 @@ import { DateTime } from "luxon";
 import paths from "@/paths";
 
 const schema = z.object({
-  id: z.string({ required_error: 'Id is required' }),
+  id: z.string({ error: (issue) => issue.input === undefined ? 'Id is required' : undefined }),
   start: z.string()
     .transform((val) => {
       const date = DateTime.fromISO(val);
@@ -27,7 +27,7 @@ const schema = z.object({
   })
   .refine((val) => val !== null, { message: "Invalid date format" }),
   name: z.string().min(1),
-  packageId: z.string({ required_error: 'Package is required' }).min(1)
+  packageId: z.string({ error: (issue) => issue.input === undefined ? 'Package is required' : undefined }).min(1)
 });
 
 export interface updateEntryState {
