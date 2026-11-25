@@ -1,6 +1,6 @@
 {
   "name": "pacchetti",
-  "version": "26.11.12",
+  "version": "26.11.25",
   "private": true,
   "scripts": {
     "dev": "next dev",
